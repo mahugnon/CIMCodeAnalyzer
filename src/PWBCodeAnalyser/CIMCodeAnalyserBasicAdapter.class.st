@@ -14,9 +14,10 @@ CIMCodeAnalyserBasicAdapter class >> accept [
 
 { #category : #initialization }
 CIMCodeAnalyserBasicAdapter class >> adapt: aFamixClass [
-	^ (self subclasses
-		detect: [ :sub | sub accept includes: aFamixClass class ])
-		new: aFamixClass
+	^ self subclasses
+		detect: [ :sub | sub accept includes: aFamixClass class ]
+		ifFound: [ :founded | founded new: aFamixClass ]
+		ifNone: [ self halt ]
 ]
 
 { #category : #initialization }

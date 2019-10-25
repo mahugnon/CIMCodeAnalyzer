@@ -11,7 +11,6 @@ CIMCodeAnalyserFmxUserObjectAdapter class >> accept [
 
 { #category : #accessing }
 CIMCodeAnalyserFmxUserObjectAdapter >> content [
-	self halt.
 	^ pbModel methods
 		collect: [ :each | CIMCodeAnalyserBasicAdapter adapt: each ]
 ]

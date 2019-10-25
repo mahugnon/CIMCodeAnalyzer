@@ -6,7 +6,10 @@ Class {
 
 { #category : #visiting }
 CIMCodeAnalyserFmxPWBMethodAdapter class >> accept [
-	^ {FamixPWBFunction}
+	^ {FamixPWBTrigger.
+	FamixPWBFunction.
+	FamixPWBEvent.
+	FamixPWBSubRoutine}
 ]
 
 { #category : #accessing }

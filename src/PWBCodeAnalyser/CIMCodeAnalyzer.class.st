@@ -12,7 +12,6 @@ Class {
 CIMCodeAnalyzer class >> defaultSpec [
 	^ SpBoxLayout newVertical
 		add: #pbModelTable;
-		add: 'Double click to browse.' height: self labelHeight;
 		yourself
 ]
 
@@ -29,11 +28,13 @@ CIMCodeAnalyzer >> initializeModel [
 
 { #category : #initialization }
 CIMCodeAnalyzer >> initializeTable [
+	| title |
 	pbModelTable := self newTreeTable.
+	title := 'Source code components'.
 	pbModelTable
 		addColumn:
 			(SpCompositeTableColumn new
-				title: 'Source code components';
+				title: title;
 				addColumn:
 					((SpImageTableColumn evaluated: #systemIcon)
 						width: 20;
@@ -50,9 +51,7 @@ CIMCodeAnalyzer >> initializeTable [
 				evaluated: [ :class | class methods size asString ]);"
 			roots: {model pbModel};
 		children: [ :elt | elt content ];
-		beResizable;
-		activateOnDoubleClick;
-		whenActivatedDo: [ :selection | selection selectedItem browse ]
+		beResizable
 ]
 
 { #category : #initialization }
