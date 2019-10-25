@@ -25,7 +25,8 @@ CIMCodeAnalyzerModel class >> uniqueInstance [
 
 { #category : #initialization }
 CIMCodeAnalyzerModel >> initialize [
-	pbModel := MooseModel root first allWithType: FamixPWBUserObject
+	pbModel := CIMCodeAnalyserBasicAdapter
+		adapt: (MooseModel root first allWithType: FamixPWBUserObject)
 ]
 
 { #category : #accessing }

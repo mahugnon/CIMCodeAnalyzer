@@ -49,7 +49,7 @@ CIMCodeAnalyzer >> initializeTable [
 				title: 'Number of methods'
 				evaluated: [ :class | class methods size asString ]);"
 			roots: {model pbModel};
-		children: [ :elt | elt methods ];
+		children: [ :elt | elt content ];
 		beResizable;
 		activateOnDoubleClick;
 		whenActivatedDo: [ :selection | selection selectedItem browse ]
