@@ -45,11 +45,11 @@ CIMCodeAnalyzer >> initializeTable [
 			(SpStringTableColumn
 				title: 'Number of Line of code'
 				evaluated: [ :elt | elt numberOfLinesOfCode ]);
-		"	addColumn:
+		addColumn:
 			(SpStringTableColumn
-				title: 'Number of methods'
-				evaluated: [ :class | class methods size asString ]);"
-			roots: {model pbModel};
+				title: 'Cyclomatic complexity'
+				evaluated: [ :elt | elt cyclomaticComplexity ]);
+		roots: {model pbModel};
 		children: [ :elt | elt content ];
 		beResizable
 ]

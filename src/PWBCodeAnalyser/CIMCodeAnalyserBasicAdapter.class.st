@@ -30,6 +30,11 @@ CIMCodeAnalyserBasicAdapter >> content [
 	^ self subclassResponsibility
 ]
 
+{ #category : #metrics }
+CIMCodeAnalyserBasicAdapter >> cyclomaticComplexity [
+	^ pbModel cyclomaticComplexity
+]
+
 { #category : #accessing }
 CIMCodeAnalyserBasicAdapter >> name [
 	^ pbModel name

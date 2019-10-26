@@ -11,6 +11,14 @@ CIMCodeAnalyserFmxTypeGroupAdapter class >> accept [
 
 { #category : #accessing }
 CIMCodeAnalyserFmxTypeGroupAdapter >> content [
-	^ pbModel
-		collect: [ :each | CIMCodeAnalyserBasicAdapter adapt: each ]
+	^ (pbModel
+		collect: [ :each | CIMCodeAnalyserBasicAdapter adapt: each ])
+		sorted: [ :a :b | a numberOfLinesOfCode > b numberOfLinesOfCode ]
+]
+
+{ #category : #metrics }
+CIMCodeAnalyserFmxTypeGroupAdapter >> cyclomaticComplexity [
+	^ self content
+		inject: 0
+		into: [ :sum :each | sum + each cyclomaticComplexity ]
 ]
