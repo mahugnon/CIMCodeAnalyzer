@@ -1,7 +1,7 @@
 Class {
 	#name : #CIMCodeAnalyserFmxPWBMethodAdapter,
 	#superclass : #CIMCodeAnalyserBasicAdapter,
-	#category : #PWBCodeAnalyser
+	#category : #'PWBCodeAnalyser-Moose-adapters'
 }
 
 { #category : #visiting }
@@ -15,4 +15,9 @@ CIMCodeAnalyserFmxPWBMethodAdapter class >> accept [
 { #category : #accessing }
 CIMCodeAnalyserFmxPWBMethodAdapter >> content [
 	^ {}
+]
+
+{ #category : #accessing }
+CIMCodeAnalyserFmxPWBMethodAdapter >> outgoingInvocations [
+	^ pbModel outgoingInvocations flatCollect: #candidates
 ]

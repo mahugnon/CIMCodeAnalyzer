@@ -7,7 +7,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #PWBCodeAnalyser
+	#category : #'PWBCodeAnalyser-Models'
 }
 
 { #category : #accessing }

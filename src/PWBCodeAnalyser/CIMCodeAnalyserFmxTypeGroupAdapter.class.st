@@ -1,7 +1,7 @@
 Class {
 	#name : #CIMCodeAnalyserFmxTypeGroupAdapter,
 	#superclass : #CIMCodeAnalyserBasicAdapter,
-	#category : #PWBCodeAnalyser
+	#category : #'PWBCodeAnalyser-Moose-adapters'
 }
 
 { #category : #visiting }
@@ -13,6 +13,7 @@ CIMCodeAnalyserFmxTypeGroupAdapter class >> accept [
 CIMCodeAnalyserFmxTypeGroupAdapter >> content [
 	^ (pbModel
 		collect: [ :each | CIMCodeAnalyserBasicAdapter adapt: each ])
+		asOrderedCollection
 		sorted: [ :a :b | a numberOfLinesOfCode > b numberOfLinesOfCode ]
 ]
 
@@ -21,4 +22,9 @@ CIMCodeAnalyserFmxTypeGroupAdapter >> cyclomaticComplexity [
 	^ self content
 		inject: 0
 		into: [ :sum :each | sum + each cyclomaticComplexity ]
+]
+
+{ #category : #accessing }
+CIMCodeAnalyserFmxTypeGroupAdapter >> outgoingInvocations [
+	^ self content collect: #outgoingInvocations
 ]

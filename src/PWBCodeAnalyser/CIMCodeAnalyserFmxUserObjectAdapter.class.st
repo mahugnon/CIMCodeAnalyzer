@@ -1,7 +1,7 @@
 Class {
 	#name : #CIMCodeAnalyserFmxUserObjectAdapter,
 	#superclass : #CIMCodeAnalyserBasicAdapter,
-	#category : #PWBCodeAnalyser
+	#category : #'PWBCodeAnalyser-Moose-adapters'
 }
 
 { #category : #visiting }
@@ -21,4 +21,9 @@ CIMCodeAnalyserFmxUserObjectAdapter >> cyclomaticComplexity [
 	^ self content
 		inject: 0
 		into: [ :sum :each | sum + each cyclomaticComplexity ]
+]
+
+{ #category : #accessing }
+CIMCodeAnalyserFmxUserObjectAdapter >> outgoingInvocations [
+	^ self content collect: #outgoingInvocations
 ]

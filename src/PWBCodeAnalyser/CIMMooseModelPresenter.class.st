@@ -1,33 +1,33 @@
 Class {
-	#name : #CIMCodeAnalyzer,
+	#name : #CIMMooseModelPresenter,
 	#superclass : #SpPresenter,
 	#instVars : [
 		'model',
 		'pbModelTable'
 	],
-	#category : #PWBCodeAnalyser
+	#category : #'PWBCodeAnalyser-Presenters'
 }
 
 { #category : #specs }
-CIMCodeAnalyzer class >> defaultSpec [
+CIMMooseModelPresenter class >> defaultSpec [
 	^ SpBoxLayout newVertical
 		add: #pbModelTable;
 		yourself
 ]
 
 { #category : #examples }
-CIMCodeAnalyzer class >> run [
+CIMMooseModelPresenter class >> run [
 	<example>
 	self new openWithSpec
 ]
 
 { #category : #initialization }
-CIMCodeAnalyzer >> initializeModel [
+CIMMooseModelPresenter >> initializeModel [
 	model := CIMCodeAnalyzerModel uniqueInstance
 ]
 
 { #category : #initialization }
-CIMCodeAnalyzer >> initializeTable [
+CIMMooseModelPresenter >> initializeTable [
 	| title |
 	pbModelTable := self newTreeTable.
 	title := 'Source code components'.
@@ -55,7 +55,7 @@ CIMCodeAnalyzer >> initializeTable [
 ]
 
 { #category : #initialization }
-CIMCodeAnalyzer >> initializeWidgets [
+CIMMooseModelPresenter >> initializeWidgets [
 	self initializeModel.
 	self initializeTable
 ]

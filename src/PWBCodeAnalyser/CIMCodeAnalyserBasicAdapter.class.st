@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'pbModel'
 	],
-	#category : #PWBCodeAnalyser
+	#category : #'PWBCodeAnalyser-Moose-adapters'
 }
 
 { #category : #visiting }
