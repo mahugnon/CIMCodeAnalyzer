@@ -6,7 +6,8 @@ Class {
 
 { #category : #visiting }
 CIMCodeAnalyserFmxTypeGroupAdapter class >> accept [
-	^ {FAMIXTypeGroup}
+	^ {FAMIXTypeGroup.
+	FAMIXMethodGroup}
 ]
 
 { #category : #accessing }

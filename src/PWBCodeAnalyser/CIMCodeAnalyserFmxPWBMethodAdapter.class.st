@@ -17,7 +17,14 @@ CIMCodeAnalyserFmxPWBMethodAdapter >> content [
 	^ {}
 ]
 
+{ #category : #'as yet unclassified' }
+CIMCodeAnalyserFmxPWBMethodAdapter >> numberOfInvocationToward: aCIMCodeAnalyserFmxPWBMethodAdapter [
+	^ self outgoingInvocationsCandidates
+		count: [ :each | each = aCIMCodeAnalyserFmxPWBMethodAdapter ]
+]
+
 { #category : #accessing }
-CIMCodeAnalyserFmxPWBMethodAdapter >> outgoingInvocations [
-	^ pbModel outgoingInvocations flatCollect: #candidates
+CIMCodeAnalyserFmxPWBMethodAdapter >> outgoingInvocationsCandidates [
+	^ (pbModel outgoingInvocations flatCollect: #candidates)
+		collect: #name
 ]
