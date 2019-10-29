@@ -29,3 +29,8 @@ CIMCodeAnalyserFmxTypeGroupAdapter >> cyclomaticComplexity [
 CIMCodeAnalyserFmxTypeGroupAdapter >> outgoingInvocations [
 	^ self content collect: #outgoingInvocations
 ]
+
+{ #category : #'as yet unclassified' }
+CIMCodeAnalyserFmxTypeGroupAdapter >> roassalPresenter [
+	^ CIMUserObjectReferencesPresenter
+]

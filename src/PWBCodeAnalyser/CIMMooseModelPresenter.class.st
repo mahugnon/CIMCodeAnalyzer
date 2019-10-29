@@ -23,7 +23,13 @@ CIMMooseModelPresenter class >> run [
 
 { #category : #initialization }
 CIMMooseModelPresenter >> initializeModel [
-	model := CIMCodeAnalyzerModel uniqueInstance
+	model := CIMMooseModelPresenterModel new
+]
+
+{ #category : #initialization }
+CIMMooseModelPresenter >> initializePresenter [
+	pbModelTable
+		whenSelectionChangedDo: [ :selected | model selected: selected selectedItem ]
 ]
 
 { #category : #initialization }
@@ -58,4 +64,14 @@ CIMMooseModelPresenter >> initializeTable [
 CIMMooseModelPresenter >> initializeWidgets [
 	self initializeModel.
 	self initializeTable
+]
+
+{ #category : #accessing }
+CIMMooseModelPresenter >> model: anObject [
+	model := anObject
+]
+
+{ #category : #accessing }
+CIMMooseModelPresenter >> pbModel [
+	^ model
 ]

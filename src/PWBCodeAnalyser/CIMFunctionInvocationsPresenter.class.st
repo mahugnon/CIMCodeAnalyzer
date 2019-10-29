@@ -10,27 +10,22 @@ CIMFunctionInvocationsPresenter class >> run [
 	self new openWithSpec
 ]
 
-{ #category : #'as yet unclassified' }
-CIMFunctionInvocationsPresenter >> adapterFrom: aCollection [
-	^ model select: [ :each | aCollection includes: each name ]
-]
-
 { #category : #initialization }
 CIMFunctionInvocationsPresenter >> drawOn1: aView [
 	| es eb  |
 	aView @ RTDraggableView @ RTZoomableView.
 	es := (RTEllipse new
 		size: 15;
-		color: Color blue) elementsOn: model.
+		color: Color blue) elementsOn: pbModel.
 	aView addAll: es.
 	eb := RTEdgeBuilder new.
 	eb shape lineDualWidth
 		color: Color blue trans;
 		withShorterDistanceAttachPoint;
 		widthFrom:
-				[ :anEdge | (anEdge from model numberOfInvocationToward: anEdge to model) sqrt * 4 ];
+				[ :anEdge | (anEdge from pbModel numberOfInvocationToward: anEdge to pbModel) sqrt * 4 ];
 		widthTo:
-				[ :anEdge | (anEdge to model numberOfInvocationToward: anEdge from model) sqrt * 4 ].
+				[ :anEdge | (anEdge to pbModel numberOfInvocationToward: anEdge from pbModel) sqrt * 4 ].
 	eb
 		view: aView;
 		noRepetition;
@@ -53,7 +48,7 @@ CIMFunctionInvocationsPresenter >> drawOn: aView [
 	aView @ RTDraggableView @ RTZoomableView.
 	es := (RTEllipse new
 		size: 15;
-		color: Color blue) elementsOn: model.
+		color: Color blue) elementsOn: pbModel.
 	aView addAll: es.
 	es @ RTDraggable @ RTPopup.
 	eb := RTEdgeBuilder new.
@@ -64,16 +59,13 @@ CIMFunctionInvocationsPresenter >> drawOn: aView [
 		connectToAll: [ :each | self adapterFrom: each outgoingInvocationsCandidates asSet ].
 	RTMetricNormalizer new
 		elements: es;
-		normalizeSize: #numberOfLinesOfCode.
-	RTTreeLayout new on: aView elements.
-	^ aView
+		normalizeSize: #numberOfLinesOfCode;
+		normalizeColor: #cyclomaticComplexity.
+	RTForceBasedLayout new on: aView elements.
+	^ aView build
 ]
 
 { #category : #initialization }
 CIMFunctionInvocationsPresenter >> initializeModel [
-	model := (CIMCodeAnalyserBasicAdapter
-		adapt:
-			((MooseModel root first allWithType: FamixPWBFunction)
-				sorted: [ :a :b | a numberOfLinesOfCode > b numberOfLinesOfCode ]))
-		content
+	pbModel := CIMMooseModelPresenterModel new
 ]

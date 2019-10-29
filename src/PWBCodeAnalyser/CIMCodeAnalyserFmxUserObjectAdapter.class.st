@@ -23,7 +23,27 @@ CIMCodeAnalyserFmxUserObjectAdapter >> cyclomaticComplexity [
 		into: [ :sum :each | sum + each cyclomaticComplexity ]
 ]
 
+{ #category : #api }
+CIMCodeAnalyserFmxUserObjectAdapter >> incomingReferences [
+	^ pbModel incomingReferences collectAsSet: #from
+]
+
+{ #category : #'as yet unclassified' }
+CIMCodeAnalyserFmxUserObjectAdapter >> numberOfMethods [
+	^ self content size
+]
+
 { #category : #accessing }
 CIMCodeAnalyserFmxUserObjectAdapter >> outgoingInvocations [
 	^ self content collect: #outgoingInvocations
+]
+
+{ #category : #'as yet unclassified' }
+CIMCodeAnalyserFmxUserObjectAdapter >> outgoingReferencesTo [
+	^ pbModel outgoingInvocations collectAsSet: #to
+]
+
+{ #category : #'as yet unclassified' }
+CIMCodeAnalyserFmxUserObjectAdapter >> roassalPresenter [
+	^ CIMFunctionInvocationsPresenter
 ]

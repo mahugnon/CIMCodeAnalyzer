@@ -18,7 +18,7 @@ CIMUserObjectReferencesPresenter >> drawOn: aView [
 		color: [ :elt | 
 			elt incomingReferences isEmpty
 				ifTrue: [ Color green ]
-				ifFalse: [ Color blue ] ]) elementsOn: model.
+				ifFalse: [ Color blue ] ]) elementsOn: pbModel.
 	aView addAll: es.
 	es @ RTDraggable @ RTPopup.
 	eb := RTEdgeBuilder new.
@@ -26,17 +26,11 @@ CIMUserObjectReferencesPresenter >> drawOn: aView [
 		view: aView;
 		elements: es;
 		moveBehind;
-		connectToAll: [ :each | each outgoingReferences collectAsSet: #to ].
+		connectToAll: [ :each | self adapterFrom: each outgoingReferencesTo ].
 	RTMetricNormalizer new
 		elements: es;
 		normalizeSize: #numberOfMethods;
 		normalizeColor: #numberOfLinesOfCode.
 	RTForceBasedLayout new on: aView elements.
-	aView
-]
-
-{ #category : #initialization }
-CIMUserObjectReferencesPresenter >> initializeModel [
-	model := (MooseModel root first allWithType: FamixPWBUserObject)
-		sorted: [ :a :b | a numberOfLinesOfCode > b numberOfLinesOfCode ]
+	^ aView build
 ]

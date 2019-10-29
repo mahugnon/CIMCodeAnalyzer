@@ -28,3 +28,8 @@ CIMCodeAnalyserFmxPWBMethodAdapter >> outgoingInvocationsCandidates [
 	^ (pbModel outgoingInvocations flatCollect: #candidates)
 		collect: #name
 ]
+
+{ #category : #'as yet unclassified' }
+CIMCodeAnalyserFmxPWBMethodAdapter >> roassalPresenter [
+	^ CIMFunctionInvocationsPresenter
+]

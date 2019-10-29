@@ -2,8 +2,9 @@ Class {
 	#name : #CIMRoassalPresenter,
 	#superclass : #SpPresenter,
 	#instVars : [
-		'model',
-		'diagram'
+		'diagram',
+		'inputPort',
+		'pbModel'
 	],
 	#category : #'PWBCodeAnalyser-Presenters'
 }
@@ -13,6 +14,26 @@ CIMRoassalPresenter class >> defaultSpec [
 	^ SpPanedLayout newVertical
 		add: #diagram;
 		yourself
+]
+
+{ #category : #'as yet unclassified' }
+CIMRoassalPresenter >> adapterFrom: aCollection [
+	^ pbModel select: [ :each | aCollection includes: each name ]
+]
+
+{ #category : #initialization }
+CIMRoassalPresenter >> defineInputPorts [
+	^ {inputPort}
+]
+
+{ #category : #accessing }
+CIMRoassalPresenter >> diagram [
+	^ diagram
+]
+
+{ #category : #accessing }
+CIMRoassalPresenter >> diagram: anObject [
+	diagram := anObject
 ]
 
 { #category : #initialization }
@@ -30,12 +51,22 @@ CIMRoassalPresenter >> initializeDiagram [
 ]
 
 { #category : #initialization }
-CIMRoassalPresenter >> initializeModel [
-	^ self subclassResponsibility
+CIMRoassalPresenter >> initializeInputPort [
+	inputPort := SpModelPort new
 ]
 
 { #category : #initialization }
 CIMRoassalPresenter >> initializeWidgets [
-	self initializeModel.
-	self initializeDiagram
+	self initializeDiagram.
+	self initializeInputPort
+]
+
+{ #category : #accessing }
+CIMRoassalPresenter >> pbModel [
+	^ pbModel
+]
+
+{ #category : #accessing }
+CIMRoassalPresenter >> pbModel: anObject [
+	pbModel := anObject
 ]

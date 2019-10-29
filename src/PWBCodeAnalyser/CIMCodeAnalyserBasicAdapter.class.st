@@ -54,3 +54,8 @@ CIMCodeAnalyserBasicAdapter >> pbModel [
 CIMCodeAnalyserBasicAdapter >> pbModel: anObject [
 	pbModel := anObject
 ]
+
+{ #category : #'as yet unclassified' }
+CIMCodeAnalyserBasicAdapter >> roassalPresenter [
+	^ self subclassResponsibility
+]
