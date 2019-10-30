@@ -52,11 +52,14 @@ CIMFunctionInvocationsPresenter >> drawOn: aView [
 	aView addAll: es.
 	es @ RTDraggable @ (RTPopup text: #name).
 	eb := RTEdgeBuilder new.
+	eb shape arrowedLine.
 	eb
 		view: aView;
+		highlightable;
 		elements: es;
 		moveBehind;
-		connectToAll: [ :each | self adapterFrom: each outgoingInvocationsCandidatesName asSet ].
+		connectToAll:
+				[ :each | self adapterFrom: each outgoingInvocationsCandidatesName asSet ].
 	RTMetricNormalizer new
 		elements: es;
 		normalizeSize: #numberOfLinesOfCode;
