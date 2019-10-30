@@ -11,7 +11,7 @@ Class {
 
 { #category : #specs }
 CIMRoassalPresenter class >> defaultSpec [
-	^ SpPanedLayout newVertical
+	^ SpPanedLayout newHorizontal
 		add: #diagram;
 		yourself
 ]
@@ -19,11 +19,6 @@ CIMRoassalPresenter class >> defaultSpec [
 { #category : #'as yet unclassified' }
 CIMRoassalPresenter >> adapterFrom: aCollection [
 	^ pbModel select: [ :each | aCollection includes: each name ]
-]
-
-{ #category : #initialization }
-CIMRoassalPresenter >> defineInputPorts [
-	^ {inputPort}
 ]
 
 { #category : #accessing }

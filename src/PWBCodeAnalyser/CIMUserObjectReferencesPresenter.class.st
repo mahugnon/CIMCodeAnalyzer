@@ -18,15 +18,15 @@ CIMUserObjectReferencesPresenter >> drawOn: aView [
 		color: [ :elt | 
 			elt incomingReferences isEmpty
 				ifTrue: [ Color green ]
-				ifFalse: [ Color blue ] ]) elementsOn: pbModel.
+				ifFalse: [ Color blue ] ]) elementsOn: (pbModel collect: #pbModel).
 	aView addAll: es.
-	es @ RTDraggable @ RTPopup.
+	es @ RTDraggable @ (RTPopup text: #name).
 	eb := RTEdgeBuilder new.
 	eb
 		view: aView;
 		elements: es;
 		moveBehind;
-		connectToAll: [ :each | self adapterFrom: each outgoingReferencesTo ].
+		connectToAll: [ :each | each incomingReferences collect: #from ].
 	RTMetricNormalizer new
 		elements: es;
 		normalizeSize: #numberOfMethods;

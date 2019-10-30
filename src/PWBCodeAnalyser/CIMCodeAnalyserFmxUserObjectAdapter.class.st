@@ -29,6 +29,11 @@ CIMCodeAnalyserFmxUserObjectAdapter >> incomingReferences [
 ]
 
 { #category : #'as yet unclassified' }
+CIMCodeAnalyserFmxUserObjectAdapter >> incomingReferencesFrom [
+	^ pbModel incomingReferences collect: #from
+]
+
+{ #category : #'as yet unclassified' }
 CIMCodeAnalyserFmxUserObjectAdapter >> numberOfMethods [
 	^ self content size
 ]
@@ -36,11 +41,6 @@ CIMCodeAnalyserFmxUserObjectAdapter >> numberOfMethods [
 { #category : #accessing }
 CIMCodeAnalyserFmxUserObjectAdapter >> outgoingInvocations [
 	^ self content collect: #outgoingInvocations
-]
-
-{ #category : #'as yet unclassified' }
-CIMCodeAnalyserFmxUserObjectAdapter >> outgoingReferencesTo [
-	^ pbModel outgoingInvocations collectAsSet: #to
 ]
 
 { #category : #'as yet unclassified' }

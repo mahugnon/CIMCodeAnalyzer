@@ -30,7 +30,7 @@ CIMFunctionInvocationsPresenter >> drawOn1: aView [
 		view: aView;
 		noRepetition;
 		noBidirectional;
-		connectToAll: [ :each | self adapterFrom: each outgoingInvocationsCandidates asSet ].
+		connectToAll: [ :each | self adapterFrom: each outgoingInvocationsCandidatesName asSet ].
 	RTMetricNormalizer new
 		elements: es;
 		normalizeSize: [ :e | 
@@ -50,18 +50,18 @@ CIMFunctionInvocationsPresenter >> drawOn: aView [
 		size: 15;
 		color: Color blue) elementsOn: pbModel.
 	aView addAll: es.
-	es @ RTDraggable @ RTPopup.
+	es @ RTDraggable @ (RTPopup text: #name).
 	eb := RTEdgeBuilder new.
 	eb
 		view: aView;
 		elements: es;
 		moveBehind;
-		connectToAll: [ :each | self adapterFrom: each outgoingInvocationsCandidates asSet ].
+		connectToAll: [ :each | self adapterFrom: each outgoingInvocationsCandidatesName asSet ].
 	RTMetricNormalizer new
 		elements: es;
 		normalizeSize: #numberOfLinesOfCode;
 		normalizeColor: #cyclomaticComplexity.
-	RTForceBasedLayout new on: aView elements.
+	RTTreeLayout new on: aView elements.
 	^ aView build
 ]
 

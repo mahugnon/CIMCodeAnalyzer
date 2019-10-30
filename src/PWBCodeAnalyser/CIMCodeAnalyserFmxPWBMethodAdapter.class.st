@@ -14,17 +14,25 @@ CIMCodeAnalyserFmxPWBMethodAdapter class >> accept [
 
 { #category : #accessing }
 CIMCodeAnalyserFmxPWBMethodAdapter >> content [
-	^ {}
+	^ (self outgoingInvocationsCandidates
+		collect: [ :each | CIMCodeAnalyserBasicAdapter adapt: each ])
+		add: self;
+		yourself
 ]
 
 { #category : #'as yet unclassified' }
 CIMCodeAnalyserFmxPWBMethodAdapter >> numberOfInvocationToward: aCIMCodeAnalyserFmxPWBMethodAdapter [
-	^ self outgoingInvocationsCandidates
+	^ self outgoingInvocationsCandidatesName
 		count: [ :each | each = aCIMCodeAnalyserFmxPWBMethodAdapter ]
 ]
 
 { #category : #accessing }
 CIMCodeAnalyserFmxPWBMethodAdapter >> outgoingInvocationsCandidates [
+	^ pbModel outgoingInvocations flatCollect: #candidates
+]
+
+{ #category : #accessing }
+CIMCodeAnalyserFmxPWBMethodAdapter >> outgoingInvocationsCandidatesName [
 	^ (pbModel outgoingInvocations flatCollect: #candidates)
 		collect: #name
 ]
