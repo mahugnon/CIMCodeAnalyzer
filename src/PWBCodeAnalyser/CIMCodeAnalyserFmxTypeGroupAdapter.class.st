@@ -11,7 +11,7 @@ CIMCodeAnalyserFmxTypeGroupAdapter class >> accept [
 ]
 
 { #category : #accessing }
-CIMCodeAnalyserFmxTypeGroupAdapter >> content [
+CIMCodeAnalyserFmxTypeGroupAdapter >> adaptPbModel [
 	^ (pbModel
 		collect: [ :each | CIMCodeAnalyserBasicAdapter adapt: each ])
 		asOrderedCollection
@@ -20,7 +20,7 @@ CIMCodeAnalyserFmxTypeGroupAdapter >> content [
 
 { #category : #metrics }
 CIMCodeAnalyserFmxTypeGroupAdapter >> cyclomaticComplexity [
-	^ self content
+	^ self adaptPbModel
 		inject: 0
 		into: [ :sum :each | sum + each cyclomaticComplexity ]
 ]
@@ -33,4 +33,9 @@ CIMCodeAnalyserFmxTypeGroupAdapter >> outgoingInvocations [
 { #category : #'as yet unclassified' }
 CIMCodeAnalyserFmxTypeGroupAdapter >> roassalPresenter [
 	^ CIMUserObjectReferencesPresenter
+]
+
+{ #category : #accessing }
+CIMCodeAnalyserFmxTypeGroupAdapter >> setContent [
+	content := self adaptPbModel
 ]

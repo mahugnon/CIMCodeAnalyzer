@@ -2,7 +2,8 @@ Class {
 	#name : #CIMCodeAnalyserBasicAdapter,
 	#superclass : #Object,
 	#instVars : [
-		'pbModel'
+		'pbModel',
+		'content'
 	],
 	#category : #'PWBCodeAnalyser-Moose-adapters'
 }
@@ -27,12 +28,18 @@ CIMCodeAnalyserBasicAdapter class >> new: aFamixClass [
 
 { #category : #accessing }
 CIMCodeAnalyserBasicAdapter >> content [
-	^ self subclassResponsibility
+	^ content
 ]
 
 { #category : #metrics }
 CIMCodeAnalyserBasicAdapter >> cyclomaticComplexity [
 	^ pbModel cyclomaticComplexity
+]
+
+{ #category : #initialization }
+CIMCodeAnalyserBasicAdapter >> initialize [
+	super initialize.
+	content := {}
 ]
 
 { #category : #accessing }

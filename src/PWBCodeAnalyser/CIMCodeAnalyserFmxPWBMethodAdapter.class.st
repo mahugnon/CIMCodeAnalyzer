@@ -12,14 +12,6 @@ CIMCodeAnalyserFmxPWBMethodAdapter class >> accept [
 	FamixPWBSubRoutine}
 ]
 
-{ #category : #accessing }
-CIMCodeAnalyserFmxPWBMethodAdapter >> content [
-	^ (self outgoingInvocationsCandidates
-		collect: [ :each | CIMCodeAnalyserBasicAdapter adapt: each ])
-		add: self;
-		yourself
-]
-
 { #category : #'as yet unclassified' }
 CIMCodeAnalyserFmxPWBMethodAdapter >> numberOfInvocationToward: aCIMCodeAnalyserFmxPWBMethodAdapter [
 	^ self outgoingInvocationsCandidatesName
@@ -40,4 +32,12 @@ CIMCodeAnalyserFmxPWBMethodAdapter >> outgoingInvocationsCandidatesName [
 { #category : #'as yet unclassified' }
 CIMCodeAnalyserFmxPWBMethodAdapter >> roassalPresenter [
 	^ CIMFunctionInvocationsPresenter
+]
+
+{ #category : #accessing }
+CIMCodeAnalyserFmxPWBMethodAdapter >> setContent [
+	content := (self outgoingInvocationsCandidates
+		collect: [ :each | CIMCodeAnalyserBasicAdapter adapt: each ])
+		add: self;
+		yourself
 ]

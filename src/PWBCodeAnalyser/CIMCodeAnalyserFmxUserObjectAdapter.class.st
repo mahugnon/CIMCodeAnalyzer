@@ -9,13 +9,6 @@ CIMCodeAnalyserFmxUserObjectAdapter class >> accept [
 	^ {FamixPWBUserObject}
 ]
 
-{ #category : #accessing }
-CIMCodeAnalyserFmxUserObjectAdapter >> content [
-	^ (pbModel methods
-		collect: [ :each | CIMCodeAnalyserBasicAdapter adapt: each ])
-		sort: [ :a :b | a numberOfLinesOfCode > b numberOfLinesOfCode ]
-]
-
 { #category : #metrics }
 CIMCodeAnalyserFmxUserObjectAdapter >> cyclomaticComplexity [
 	^ self content
@@ -46,4 +39,11 @@ CIMCodeAnalyserFmxUserObjectAdapter >> outgoingInvocations [
 { #category : #'as yet unclassified' }
 CIMCodeAnalyserFmxUserObjectAdapter >> roassalPresenter [
 	^ CIMFunctionInvocationsPresenter
+]
+
+{ #category : #accessing }
+CIMCodeAnalyserFmxUserObjectAdapter >> setContent [
+	content := (pbModel methods
+		collect: [ :each | CIMCodeAnalyserBasicAdapter adapt: each ])
+		sort: [ :a :b | a numberOfLinesOfCode > b numberOfLinesOfCode ]
 ]

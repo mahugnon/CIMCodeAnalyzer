@@ -31,6 +31,6 @@ CIMUserObjectReferencesPresenter >> drawOn: aView [
 		elements: es;
 		normalizeSize: #numberOfMethods;
 		normalizeColor: #numberOfLinesOfCode.
-	RTForceBasedLayout new on: aView elements.
+	RTTreeLayout new on: aView elements.
 	^ aView build
 ]
