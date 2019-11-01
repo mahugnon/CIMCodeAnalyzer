@@ -10,8 +10,15 @@ CIMCodeAnalyserFmxUserObjectAdapter class >> accept [
 ]
 
 { #category : #metrics }
+CIMCodeAnalyserFmxUserObjectAdapter >> adaptPbModel [
+	^ (pbModel methods
+		collect: [ :each | CIMCodeAnalyserBasicAdapter adapt: each ])
+		sort: [ :a :b | a numberOfLinesOfCode > b numberOfLinesOfCode ]
+]
+
+{ #category : #metrics }
 CIMCodeAnalyserFmxUserObjectAdapter >> cyclomaticComplexity [
-	^ self content
+	^ self adaptPbModel
 		inject: 0
 		into: [ :sum :each | sum + each cyclomaticComplexity ]
 ]
@@ -43,7 +50,5 @@ CIMCodeAnalyserFmxUserObjectAdapter >> roassalPresenter [
 
 { #category : #accessing }
 CIMCodeAnalyserFmxUserObjectAdapter >> setContent [
-	content := (pbModel methods
-		collect: [ :each | CIMCodeAnalyserBasicAdapter adapt: each ])
-		sort: [ :a :b | a numberOfLinesOfCode > b numberOfLinesOfCode ]
+	content := self adaptPbModel
 ]

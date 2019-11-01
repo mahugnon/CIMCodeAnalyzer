@@ -27,6 +27,10 @@ CIMCodeAnalyserBasicAdapter class >> new: aFamixClass [
 ]
 
 { #category : #accessing }
+CIMCodeAnalyserBasicAdapter >> adaptPbModel [
+]
+
+{ #category : #accessing }
 CIMCodeAnalyserBasicAdapter >> content [
 	^ content
 ]
