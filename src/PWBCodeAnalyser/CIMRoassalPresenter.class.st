@@ -11,7 +11,7 @@ Class {
 
 { #category : #specs }
 CIMRoassalPresenter class >> defaultSpec [
-	^ SpPanedLayout newHorizontal
+	^ SpBoxLayout  newHorizontal
 		add: #diagram;
 		yourself
 ]

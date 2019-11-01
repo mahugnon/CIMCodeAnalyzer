@@ -23,6 +23,11 @@ CIMMainPresenter class >> run [
 	^ self new openWithSpec
 ]
 
+{ #category : #'as yet unclassified' }
+CIMMainPresenter class >> title [
+^'Izy view'
+]
+
 { #category : #initialization }
 CIMMainPresenter >> initializeRoassal [
 	diagramPresenter := self newLabel.

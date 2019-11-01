@@ -22,8 +22,10 @@ CIMUserObjectReferencesPresenter >> drawOn: aView [
 	aView addAll: es.
 	es @ RTDraggable @ (RTPopup text: #name).
 	eb := RTEdgeBuilder new.
+	eb shape arrowedLine.
 	eb
 		view: aView;
+		highlightable;
 		elements: es;
 		moveBehind;
 		connectToAll: [ :each | each incomingReferences collect: #from ].
