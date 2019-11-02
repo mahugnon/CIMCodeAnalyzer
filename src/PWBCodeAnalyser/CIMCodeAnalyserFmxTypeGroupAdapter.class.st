@@ -20,9 +20,16 @@ CIMCodeAnalyserFmxTypeGroupAdapter >> adaptPbModel [
 
 { #category : #metrics }
 CIMCodeAnalyserFmxTypeGroupAdapter >> cyclomaticComplexity [
-	^ self adaptPbModel
+	^ self content 
 		inject: 0
 		into: [ :sum :each | sum + each cyclomaticComplexity ]
+]
+
+{ #category : #metrics }
+CIMCodeAnalyserFmxTypeGroupAdapter >> numberOfLinesOfCode [
+	^ self content
+		inject: 0
+		into: [ :sum :each | sum + each numberOfLinesOfCode ]
 ]
 
 { #category : #accessing }

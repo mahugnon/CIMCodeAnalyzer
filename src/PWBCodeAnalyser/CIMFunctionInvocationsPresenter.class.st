@@ -59,7 +59,7 @@ CIMFunctionInvocationsPresenter >> drawOn: aView [
 		elements: es;
 		moveBehind;
 		connectToAll:
-				[ :each | self adapterFrom: each outgoingInvocationsCandidatesName asSet ].
+				[ :each | self adapterFrom: each outgoingInvocationsCandidatesName  ].
 	RTMetricNormalizer new
 		elements: es;
 		normalizeSize: #numberOfLinesOfCode;

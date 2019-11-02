@@ -18,7 +18,7 @@ CIMCodeAnalyserFmxUserObjectAdapter >> adaptPbModel [
 
 { #category : #metrics }
 CIMCodeAnalyserFmxUserObjectAdapter >> cyclomaticComplexity [
-	^ self adaptPbModel
+	^ self content 
 		inject: 0
 		into: [ :sum :each | sum + each cyclomaticComplexity ]
 ]

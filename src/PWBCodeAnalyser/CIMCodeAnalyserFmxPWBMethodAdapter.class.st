@@ -20,7 +20,7 @@ CIMCodeAnalyserFmxPWBMethodAdapter >> numberOfInvocationToward: aCIMCodeAnalyser
 
 { #category : #accessing }
 CIMCodeAnalyserFmxPWBMethodAdapter >> outgoingInvocationsCandidates [
-	^ pbModel outgoingInvocations flatCollect: #candidates
+	^ (pbModel outgoingInvocations flatCollect: #candidates) asSet
 ]
 
 { #category : #accessing }
