@@ -6,7 +6,7 @@ Class {
 		'inputPort',
 		'pbModel'
 	],
-	#category : #'PWBCodeAnalyser-Presenters'
+	#category : #'PWBCodeAnalyser-TreeBase-Presenters'
 }
 
 { #category : #specs }

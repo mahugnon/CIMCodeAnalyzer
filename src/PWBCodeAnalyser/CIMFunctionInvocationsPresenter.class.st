@@ -1,7 +1,7 @@
 Class {
 	#name : #CIMFunctionInvocationsPresenter,
 	#superclass : #CIMRoassalPresenter,
-	#category : #'PWBCodeAnalyser-Presenters'
+	#category : #'PWBCodeAnalyser-TreeBase-Presenters'
 }
 
 { #category : #examples }

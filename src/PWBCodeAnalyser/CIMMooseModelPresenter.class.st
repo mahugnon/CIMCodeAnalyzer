@@ -5,7 +5,7 @@ Class {
 		'model',
 		'pbModelTable'
 	],
-	#category : #'PWBCodeAnalyser-Presenters'
+	#category : #'PWBCodeAnalyser-TreeBase-Presenters'
 }
 
 { #category : #specs }

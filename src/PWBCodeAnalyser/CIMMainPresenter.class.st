@@ -4,9 +4,10 @@ Class {
 	#instVars : [
 		'modelPresenter',
 		'diagramPresenter',
-		'model'
+		'model',
+		'statisticPresenter'
 	],
-	#category : #'PWBCodeAnalyser-Presenters'
+	#category : #'PWBCodeAnalyser-TreeBase-Presenters'
 }
 
 { #category : #specs }
