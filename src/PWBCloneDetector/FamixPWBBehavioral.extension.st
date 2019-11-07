@@ -29,6 +29,18 @@ FamixPWBBehavioral >> increaseSelectionStatement [
 ]
 
 { #category : #'*PWBCloneDetector' }
+FamixPWBBehavioral >> numberOfArguments [
+	^ self lookUpPropertyNamed: #numberOfArguments computedAs: [ 0 ]
+]
+
+{ #category : #'*PWBCloneDetector' }
+FamixPWBBehavioral >> numberOfArguments: aNumber [
+	self privateState
+		propertyAt: #numberOfArguments
+		put: aNumber
+]
+
+{ #category : #'*PWBCloneDetector' }
 FamixPWBBehavioral >> numberOfAssignationStatements [
 	^ self
 		lookUpPropertyNamed: #numberOfAssignationStatements
@@ -46,7 +58,7 @@ FamixPWBBehavioral >> numberOfAssignationStatements: aNumber [
 FamixPWBBehavioral >> numberOfConditionalStatments [
 	^ self
 		lookUpPropertyNamed: #numberOfConditionalStatments
-		computedAs: [ 0]
+		computedAs: [ 0 ]
 ]
 
 { #category : #'*PWBCloneDetector' }
