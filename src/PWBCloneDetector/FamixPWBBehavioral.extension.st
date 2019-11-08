@@ -83,6 +83,12 @@ FamixPWBBehavioral >> numberOfIterationStatements: aNumber [
 ]
 
 { #category : #'*PWBCloneDetector' }
+FamixPWBBehavioral >> numberOfLocalVariables [
+	^ (self variables select: [ :each | each name matchesRegex: 'l.*' ])
+		size
+]
+
+{ #category : #'*PWBCloneDetector' }
 FamixPWBBehavioral >> numberOfReturnStatements [
 	^ self
 		lookUpPropertyNamed: #numberOfReturnStatements
