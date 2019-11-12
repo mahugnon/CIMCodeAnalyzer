@@ -9,7 +9,8 @@ Class {
 		'numberOfReturns',
 		'numberOfAssignments',
 		'numberOfSelections',
-		'name'
+		'name',
+		'parent'
 	],
 	#category : #'PWBCodeAnalyser-Queries'
 }
@@ -92,4 +93,19 @@ CloneMetricsResult >> numberOfSelections [
 { #category : #accessing }
 CloneMetricsResult >> numberOfSelections: anInteger [
 	numberOfSelections := anInteger
+]
+
+{ #category : #accessing }
+CloneMetricsResult >> parent [
+	^ parent
+]
+
+{ #category : #accessing }
+CloneMetricsResult >> parent: anObject [
+	parent := anObject
+]
+
+{ #category : #printing }
+CloneMetricsResult >> printOn: aStream [
+	aStream << self name
 ]

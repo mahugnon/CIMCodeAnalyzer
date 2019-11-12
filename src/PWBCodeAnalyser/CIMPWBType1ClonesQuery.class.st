@@ -25,7 +25,7 @@ CIMPWBType1ClonesQuery >> runOn: aCollection [
 		(self compare: r1 and: r2)
 			ifTrue: [ clones
 					add:
-						{r1 name.
-						r2 name} ] ].
+						{r1.
+						r2} ] ].
 	^ clones
 ]

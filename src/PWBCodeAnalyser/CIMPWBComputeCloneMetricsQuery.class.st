@@ -6,15 +6,17 @@ Class {
 
 { #category : #running }
 CIMPWBComputeCloneMetricsQuery >> runOn: aMooseGroup [
-	^ aMooseGroup
+	^ (aMooseGroup asSet
 		collect: [ :each | 
 			CloneMetricsResult new
 				name: each name;
+				parent:  each belongsTo ;
 				numberOfLinesOfCode: each numberOfLinesOfCode;
 				numberOfLocalVariables: each numberOfLocalVariables;
 				numberOfFunctionCalls: each outgoingInvocations size;
 				numberOfIterions: each numberOfIterationStatements;
 				numberOfReturns: each numberOfReturnStatements;
 				numberOfAssignments: each numberOfAssignationStatements;
-				numberOfSelections: each selectionStatement ]
+				numberOfSelections: each selectionStatement;
+				yourself ]) asOrderedCollection
 ]
