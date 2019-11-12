@@ -15,6 +15,16 @@ Class {
 }
 
 { #category : #accessing }
+CloneMetricsResult >> name [
+	^ name
+]
+
+{ #category : #accessing }
+CloneMetricsResult >> name: anObject [
+	name := anObject
+]
+
+{ #category : #accessing }
 CloneMetricsResult >> numberOfAssignments [
 	^ numberOfAssignments
 ]
