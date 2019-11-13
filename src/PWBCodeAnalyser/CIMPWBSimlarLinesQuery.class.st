@@ -4,6 +4,11 @@ Class {
 	#category : #'PWBCodeAnalyser-Queries'
 }
 
+{ #category : #'as yet unclassified' }
+CIMPWBSimlarLinesQuery >> getHashs: aMethod [
+	^ aMethod linesOfCode collect: [ :each | each hash ]
+]
+
 { #category : #running }
 CIMPWBSimlarLinesQuery >> runOn: aCollection [
 	| result method1 method2 |
@@ -17,14 +22,13 @@ CIMPWBSimlarLinesQuery >> runOn: aCollection [
 
 { #category : #running }
 CIMPWBSimlarLinesQuery >> runOn: aMethod1 and: aMethod2 [
-	| method2Lines |
-	method2Lines := aMethod2 sourceText lines.
+	| method2Lines method1Lines |
+	method2Lines := self getHashs: aMethod2.
+	method1Lines := self getHashs: aMethod1.
 	^ OrderedDictionary new
 		at: aMethod1 name put: aMethod1 linesOfCode size;
 		at: aMethod2 name put: aMethod2 linesOfCode size;
 		at: 'SimilarLines'
-			put:
-			(aMethod1 sourceText lines
-				select: [ :line | method2Lines includes: line ]);
+			put: (method1Lines count: [ :line | method2Lines includes: line ]);
 		yourself
 ]

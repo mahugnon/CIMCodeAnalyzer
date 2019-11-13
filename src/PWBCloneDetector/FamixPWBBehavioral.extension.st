@@ -29,6 +29,11 @@ FamixPWBBehavioral >> increaseSelectionStatement [
 ]
 
 { #category : #'*PWBCloneDetector' }
+FamixPWBBehavioral >> linesOfCode [
+	^ self sourceText lines reject: [ :each | each = ' ' or: each = '' ]
+]
+
+{ #category : #'*PWBCloneDetector' }
 FamixPWBBehavioral >> numberOfArguments [
 	^ self lookUpPropertyNamed: #numberOfArguments computedAs: [ 0 ]
 ]

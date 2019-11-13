@@ -6,6 +6,10 @@ Class {
 
 { #category : #running }
 CIMPWBRemoveConstructorsQuery >> runOn: aMooseGroup [
-	^ aMooseGroup
-		reject: [ :each | each name = 'constructor' or: each name = 'destroy' ]
+	^ aMooseGroup reject: [ :each | self toRemove includes: each name ]
+]
+
+{ #category : #'as yet unclassified' }
+CIMPWBRemoveConstructorsQuery >> toRemove [
+	^ #('constructor' 'destroy' 'create')
 ]
