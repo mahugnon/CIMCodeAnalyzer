@@ -17,15 +17,9 @@ CIMPWBType1ClonesQuery >> compare: r1 and: r2 [
 
 { #category : #running }
 CIMPWBType1ClonesQuery >> runOn: aCollection [
-	| clones r1 r2 |
-	clones := OrderedCollection new.
-	1 to: aCollection size - 1 do: [ :iter | 
-		r1 := aCollection at: iter.
-		r2 := aCollection at: iter + 1.
-		(self compare: r1 and: r2)
-			ifTrue: [ clones
-					add:
-						{r1.
-						r2} ] ].
-	^ clones
+	^ (aCollection
+		collect: [ :each | 
+			each name
+				-> (aCollection select: [ :method | self compare: each and: method ]) ])
+		reject: [ :each | each value size = 1 ]
 ]

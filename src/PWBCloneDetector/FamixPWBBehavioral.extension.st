@@ -69,6 +69,11 @@ FamixPWBBehavioral >> numberOfConditionalStatments: aNumber [
 ]
 
 { #category : #'*PWBCloneDetector' }
+FamixPWBBehavioral >> numberOfFunctionCalls [
+	^ (self outgoingInvocations flatCollect: #candidates) asSet size
+]
+
+{ #category : #'*PWBCloneDetector' }
 FamixPWBBehavioral >> numberOfIterationStatements [
 	^ self
 		lookUpPropertyNamed: #numberOfIterationStatements
