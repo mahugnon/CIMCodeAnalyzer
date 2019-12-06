@@ -4,10 +4,17 @@ Class {
 	#instVars : [
 		'selectedVariable',
 		'functionMap',
-		'functionsModel'
+		'functionsModel',
+		'pickedColor',
+		'colorMap'
 	],
 	#category : #CIMPWBFunctionDecomposition
 }
+
+{ #category : #accessing }
+CIMPWBModel >> colorMap [
+	^ colorMap
+]
 
 { #category : #accessing }
 CIMPWBModel >> functionMap: aFunctionMap [ 
@@ -22,7 +29,13 @@ CIMPWBModel >> functionModel [
 { #category : #drawing }
 CIMPWBModel >> initialize [
 	super initialize.
-	self initializePWBFunctionsModel
+	self initializePWBFunctionsModel.
+	self initializeColorMap
+]
+
+{ #category : #initialization }
+CIMPWBModel >> initializeColorMap [
+	colorMap := OrderedDictionary new
 ]
 
 { #category : #drawing }
@@ -35,7 +48,13 @@ CIMPWBModel >> initializePWBFunctionsModel [
 ]
 
 { #category : #accessing }
+CIMPWBModel >> pickedColor: aColor [
+	pickedColor := aColor
+]
+
+{ #category : #accessing }
 CIMPWBModel >> selectedVariable: aFamixPWBVariable [
 	selectedVariable := aFamixPWBVariable.
-	^ functionMap colorPalette
+	colorMap at: selectedVariable name put: pickedColor.
+	functionMap update
 ]

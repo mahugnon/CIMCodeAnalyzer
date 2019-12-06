@@ -2,7 +2,6 @@ Class {
 	#name : #FunctionMap,
 	#superclass : #SpPresenter,
 	#instVars : [
-		'colorMap',
 		'model',
 		'functionMap',
 		'colorPalette',
@@ -42,7 +41,10 @@ FunctionMap >> colorPalette [
 
 { #category : #initialization }
 FunctionMap >> drawColorPalette: aView [
+	| colorClick |
+	colorClick := ColorClick new model: self model.
 	RTCPQualitative new viewOn: aView.
+	aView elements @ colorClick.
 	^ aView
 ]
 
@@ -62,7 +64,7 @@ FunctionMap >> drawFunctionMap: aView [
 				addAll:
 					(RTBox new
 						fillColor:
-								[ :variable | colorMap at: variable name ifAbsent: [ Color veryVeryLightGray ] ];
+								[ :variable | model colorMap at: variable name ifAbsent: [ Color veryVeryLightGray ] ];
 						elementsOn: (each variables select: [ :var | var name matchesRegex: 'i.*' ])).
 			RTMetricNormalizer new elements: group.
 			group @ onclick.
@@ -103,9 +105,12 @@ FunctionMap >> initializeFunctionMap [
 FunctionMap >> initializeWidgets [
 	model := CIMPWBModel new.
 	model functionMap: self.
-	colorMap := OrderedDictionary new.
-	colorMap at: 'ib_montant_annulation' put: Color green.
 	self initializeFunctionMap.
 	self initializeColorPalette.
 	pickColor := self newLabel label: 'Pick a color'
+]
+
+{ #category : #accessing }
+FunctionMap >> model [
+	^ model
 ]
