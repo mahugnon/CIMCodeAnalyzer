@@ -7,3 +7,13 @@ Class {
 	],
 	#category : #PWBCloneDetector
 }
+
+{ #category : #accessing }
+PWBSpaceRemoveIlandParser >> start [
+	^ code / water
+]
+
+{ #category : #accessing }
+PWBSpaceRemoveIlandParser >> water [
+	^ (Character space parser / Character tab parser) plus
+]

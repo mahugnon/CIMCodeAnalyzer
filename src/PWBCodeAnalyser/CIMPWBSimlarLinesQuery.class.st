@@ -11,12 +11,14 @@ CIMPWBSimlarLinesQuery >> getHashs: aMethod [
 
 { #category : #running }
 CIMPWBSimlarLinesQuery >> runOn: aCollection [
-	| result method1 method2 |
-	result := OrderedCollection new.
-	1 to: aCollection size - 1 do: [ :iter | 
-		method1 := aCollection at: iter.
-		method2 := aCollection at: iter + 1.
-		result add: (self runOn: method1 and: method2) ].
+	| clones result |
+	result := OrderedDictionary new.
+	1 to: aCollection size - 1 do: [ :i | 
+		i to: aCollection size do: [ :j | 
+			clones := OrderedCollection new.
+			clones
+				add: (self runOn: (aCollection at: i) and: (aCollection at: j)) ].
+		result at: (aCollection at: i) name put: clones ].
 	^ result
 ]
 

@@ -11,5 +11,5 @@ CIMPWBRemoveConstructorsQuery >> runOn: aMooseGroup [
 
 { #category : #'as yet unclassified' }
 CIMPWBRemoveConstructorsQuery >> toRemove [
-	^ #('constructor' 'destroy' 'create')
+	^ #('constructor' 'destroy' 'create' 'destructor')
 ]
