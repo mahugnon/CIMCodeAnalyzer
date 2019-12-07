@@ -7,7 +7,10 @@ Class {
 		'menu',
 		'openColorPalette',
 		'saveView',
-		'resetView'
+		'resetView',
+		'functionMapView',
+		'zoomIn',
+		'zoomOut'
 	],
 	#category : #CIMPWBFunctionDecomposition
 }
@@ -19,7 +22,9 @@ FunctionMap class >> defaultSpec [
 			(SpBoxLayout newHorizontal
 				add: #openColorPalette;
 				add: #saveView;
-				add:#restView;
+				add: #resetView;
+				add: #zoomIn;
+				add: #zoomOut;
 				yourself)
 			withConstraints: [ :constraints | constraints height: self toolbarHeight ] yourself;
 		add: #functionMap;
@@ -30,6 +35,11 @@ FunctionMap class >> defaultSpec [
 FunctionMap class >> run [
 	<example>
 	^ self new openWithSpec
+]
+
+{ #category : #specs }
+FunctionMap class >> title [ 
+^'Function Map'
 ]
 
 { #category : #drawing }
@@ -73,6 +83,7 @@ FunctionMap >> initializeFunctionMap [
 	functionMap
 		script: [ :aView :canvas | 
 			self drawFunctionMap: aView.
+			functionMapView := aView.
 			aView canvas focusOnCenterScaled ]
 ]
 
@@ -83,7 +94,9 @@ FunctionMap >> initializePresenter [
 				model: model;
 				openWithSpec ].
 	saveView action: [ self model saveView ].
-	resetView action: [ self model resetView ]
+	resetView action: [ self model resetView ].
+	zoomIn action: [ RTZoomInMove on: functionMapView ].
+	zoomOut action: [ RTZoomOutMove on: functionMapView ]
 ]
 
 { #category : #initialization }
@@ -92,8 +105,14 @@ FunctionMap >> initializeWidgets [
 	model functionMap: self.
 	self initializeFunctionMap.
 	openColorPalette := self newButton label: 'Open color palette'.
-	saveView := self newButton  label:'Save  View'.
-	resetView := self newButton  label:'Save  View'.
+	saveView := self newButton label: 'Save  View'.
+	resetView := self newButton label: 'Reset  View'.
+	zoomIn := self newButton
+		label: 'Zoom In';
+		icon: GLMUIThemeExtraIcons glamorousZoomIn.
+	zoomOut := self newButton
+		label: 'Zoom Out';
+		icon: GLMUIThemeExtraIcons glamorousZoomOut
 ]
 
 { #category : #accessing }
@@ -129,4 +148,9 @@ FunctionMap >> subMenu [
 				icon: (self iconNamed: #smallCancelIcon);
 				action: [ self inform: 'Kill' ] ];
 		yourself
+]
+
+{ #category : #accessing }
+FunctionMap >> view [
+	^ functionMapView
 ]
