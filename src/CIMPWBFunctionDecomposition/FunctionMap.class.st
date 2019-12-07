@@ -4,7 +4,6 @@ Class {
 	#instVars : [
 		'model',
 		'functionMap',
-		'colorPalette',
 		'pickColor'
 	],
 	#category : #CIMPWBFunctionDecomposition
@@ -13,13 +12,9 @@ Class {
 { #category : #specs }
 FunctionMap class >> defaultSpec [
 	^ SpBoxLayout newVertical
-		add:
-			(SpBoxLayout newVertical
-				add: #pickColor
-					withConstraints: [ :c | c height: self labelHeight ];
-				add: #colorPalette;
-				yourself)
-			withConstraints: [ :c | c height: 300 ];
+		add: #pickColor
+			withConstraints: [ :c | c height: self labelHeight ];
+		yourself;
 		add: #functionMap;
 		yourself
 ]
@@ -28,24 +23,6 @@ FunctionMap class >> defaultSpec [
 FunctionMap class >> run [
 	<example>
 	^ self new openWithSpec
-]
-
-{ #category : #accessing }
-FunctionMap >> colorPalette [
-	| v |
-	v := RTView new.
-	v @ RTDraggableView.
-	RTCPQualitative new viewOn: v.
-	^ v
-]
-
-{ #category : #initialization }
-FunctionMap >> drawColorPalette: aView [
-	| colorClick |
-	colorClick := ColorClick new model: self model.
-	RTCPQualitative new viewOn: aView.
-	aView elements @ colorClick.
-	^ aView
 ]
 
 { #category : #drawing }
@@ -84,15 +61,6 @@ FunctionMap >> drawFunctionMap: aView [
 ]
 
 { #category : #initialization }
-FunctionMap >> initializeColorPalette [
-	colorPalette := self instantiate: RoassalModel.
-	colorPalette
-		script: [ :aView :canvas | 
-			self drawColorPalette: aView.
-			aView canvas focusOnCenterScaled ]
-]
-
-{ #category : #initialization }
 FunctionMap >> initializeFunctionMap [
 	functionMap := self instantiate: RoassalModel.
 	functionMap
@@ -102,12 +70,19 @@ FunctionMap >> initializeFunctionMap [
 ]
 
 { #category : #initialization }
+FunctionMap >> initializePresenter [
+	pickColor
+		action: [ ColorPalette new
+				model: model;
+				openWithSpec ]
+]
+
+{ #category : #initialization }
 FunctionMap >> initializeWidgets [
 	model := CIMPWBModel new.
 	model functionMap: self.
 	self initializeFunctionMap.
-	self initializeColorPalette.
-	pickColor := self newLabel label: 'Pick a color'
+	pickColor := self newButton label: 'Pick a color'
 ]
 
 { #category : #accessing }
