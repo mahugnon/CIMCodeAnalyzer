@@ -8,8 +8,27 @@ Class {
 		'pickedColor',
 		'colorMap'
 	],
+	#classInstVars : [
+		'colorMap'
+	],
 	#category : #CIMPWBFunctionDecomposition
 }
+
+{ #category : #accessing }
+CIMPWBModel class >> colorMap [
+	^ colorMap
+]
+
+{ #category : #accessing }
+CIMPWBModel class >> colorMap: anObject [
+	colorMap := anObject
+]
+
+{ #category : #initialization }
+CIMPWBModel class >> initializeColorMap [
+	<script>
+	colorMap := OrderedDictionary new
+]
 
 { #category : #accessing }
 CIMPWBModel >> colorMap [
@@ -35,7 +54,8 @@ CIMPWBModel >> initialize [
 
 { #category : #initialization }
 CIMPWBModel >> initializeColorMap [
-	colorMap := OrderedDictionary new
+colorMap := self class  colorMap  
+	 
 ]
 
 { #category : #drawing }
@@ -50,6 +70,16 @@ CIMPWBModel >> initializePWBFunctionsModel [
 { #category : #accessing }
 CIMPWBModel >> pickedColor: aColor [
 	pickedColor := aColor
+]
+
+{ #category : #'as yet unclassified' }
+CIMPWBModel >> resetView [
+	self class initializeColorMap
+]
+
+{ #category : #'as yet unclassified' }
+CIMPWBModel >> saveView [
+	self class colorMap: colorMap
 ]
 
 { #category : #accessing }

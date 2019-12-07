@@ -4,7 +4,10 @@ Class {
 	#instVars : [
 		'model',
 		'functionMap',
-		'pickColor'
+		'menu',
+		'openColorPalette',
+		'saveView',
+		'resetView'
 	],
 	#category : #CIMPWBFunctionDecomposition
 }
@@ -12,9 +15,13 @@ Class {
 { #category : #specs }
 FunctionMap class >> defaultSpec [
 	^ SpBoxLayout newVertical
-		add: #pickColor
-			withConstraints: [ :c | c height: self labelHeight ];
-		yourself;
+		add:
+			(SpBoxLayout newHorizontal
+				add: #openColorPalette;
+				add: #saveView;
+				add:#restView;
+				yourself)
+			withConstraints: [ :constraints | constraints height: self toolbarHeight ] yourself;
 		add: #functionMap;
 		yourself
 ]
@@ -71,10 +78,12 @@ FunctionMap >> initializeFunctionMap [
 
 { #category : #initialization }
 FunctionMap >> initializePresenter [
-	pickColor
+	openColorPalette
 		action: [ ColorPalette new
 				model: model;
-				openWithSpec ]
+				openWithSpec ].
+	saveView action: [ self model saveView ].
+	resetView action: [ self model resetView ]
 ]
 
 { #category : #initialization }
@@ -82,10 +91,42 @@ FunctionMap >> initializeWidgets [
 	model := CIMPWBModel new.
 	model functionMap: self.
 	self initializeFunctionMap.
-	pickColor := self newButton label: 'Pick a color'
+	openColorPalette := self newButton label: 'Open color palette'.
+	saveView := self newButton  label:'Save  View'.
+	resetView := self newButton  label:'Save  View'.
 ]
 
 { #category : #accessing }
 FunctionMap >> model [
 	^ model
+]
+
+{ #category : #initialization }
+FunctionMap >> subMenu [
+	^ self newMenu
+		addItem: [ :item | 
+			item
+				name: 'Open';
+				icon: (self iconNamed: #openIcon);
+				shortcut: $o meta;
+				action: [ self inform: 'Open' ] ];
+		addItem: [ :item | 
+			item
+				name: 'Save';
+				icon: (self iconNamed: #smallSaveIcon);
+				shortcut: $s meta;
+				action: [ self inform: 'Save' ] ];
+		addItem: [ :item | 
+			item
+				name: 'Print';
+				shortcut: $p meta;
+				icon: (self iconNamed: #smallPrintIcon);
+				action: [ self inform: 'Print' ] ];
+		addItem: [ :item | 
+			item
+				name: 'Kill';
+				shortcut: $k meta;
+				icon: (self iconNamed: #smallCancelIcon);
+				action: [ self inform: 'Kill' ] ];
+		yourself
 ]
