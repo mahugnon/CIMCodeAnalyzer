@@ -9,7 +9,8 @@ Class {
 		'colorMap'
 	],
 	#classInstVars : [
-		'colorMap'
+		'colorMap',
+		'current'
 	],
 	#category : #CIMPWBFunctionDecomposition
 }
@@ -24,10 +25,22 @@ CIMPWBModel class >> colorMap: anObject [
 	colorMap := anObject
 ]
 
+{ #category : #accessing }
+CIMPWBModel class >> current [
+	current ifNil: [ current := self new ].
+	^ current
+]
+
 { #category : #initialization }
 CIMPWBModel class >> initializeColorMap [
 	<script>
 	colorMap := OrderedDictionary new
+]
+
+{ #category : #accessing }
+CIMPWBModel class >> resetCurrent [
+	<script>
+	current := self new
 ]
 
 { #category : #accessing }
@@ -60,11 +73,11 @@ colorMap := self class  colorMap
 
 { #category : #drawing }
 CIMPWBModel >> initializePWBFunctionsModel [
-	functionsModel := (MooseModel root first
+	functionsModel := ((MooseModel root second
 		allWithType: FamixPWBFunction)
 		select: [ :each | 
 			(each variables select: [ :var | var name matchesRegex: 'i.*' ])
-				isNotEmpty ]
+				isNotEmpty ]) asSet sorted: [ :a :b | a name < b name ]
 ]
 
 { #category : #accessing }
@@ -75,6 +88,7 @@ CIMPWBModel >> pickedColor: aColor [
 { #category : #'as yet unclassified' }
 CIMPWBModel >> resetView [
 	self class initializeColorMap.
+	self initializeColorMap.
 	functionMap update
 ]
 

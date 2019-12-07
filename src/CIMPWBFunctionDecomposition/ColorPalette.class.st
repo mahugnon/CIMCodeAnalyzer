@@ -3,7 +3,9 @@ Class {
 	#superclass : #SpPresenter,
 	#instVars : [
 		'model',
-		'palette'
+		'palette',
+		'paletteOptions',
+		'selectedPalette'
 	],
 	#category : #CIMPWBFunctionDecomposition
 }
@@ -11,6 +13,8 @@ Class {
 { #category : #specs }
 ColorPalette class >> defaultSpec [
 	^ SpBoxLayout newVertical
+		add: #paletteOptions
+			withConstraints: [ :constraints | constraints height: self toolbarHeight ];
 		add: #palette;
 		yourself
 ]
@@ -21,17 +25,23 @@ ColorPalette class >> title [
 	^ 'Color palette'
 ]
 
+{ #category : #'as yet unclassified' }
+ColorPalette >> defaultPalette [
+	^ RTCPQualitative
+]
+
 { #category : #initialization }
 ColorPalette >> drawColorPalette: aView [
 	| colorClick |
 	colorClick := ColorClick new model: self model.
-	RTCPQualitative new viewOn: aView.
+	selectedPalette new viewOn: aView.
 	aView elements @ colorClick.
 	^ aView
 ]
 
 { #category : #initialization }
 ColorPalette >> initializeColorPalette [
+	selectedPalette := self defaultPalette.
 	palette := self instantiate: RoassalModel.
 	palette
 		script: [ :aView :canvas | 
@@ -40,9 +50,26 @@ ColorPalette >> initializeColorPalette [
 ]
 
 { #category : #initialization }
+ColorPalette >> initializePaletteOption [
+	paletteOptions := self newDropList.
+	paletteOptions
+		items: RTColorPalette subclasses;
+		selectItem: selectedPalette
+]
+
+{ #category : #initialization }
+ColorPalette >> initializePresenters [
+	paletteOptions
+		whenSelectedItemChangedDo: [ :selected | 
+			selectedPalette := selected.
+			self update ]
+]
+
+{ #category : #initialization }
 ColorPalette >> initializeWidgets [
 	super initializeWidgets.
-	self initializeColorPalette
+	self initializeColorPalette.
+	self initializePaletteOption
 ]
 
 { #category : #accessing }

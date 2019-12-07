@@ -26,7 +26,8 @@ FunctionMap class >> defaultSpec [
 				add: #zoomIn;
 				add: #zoomOut;
 				yourself)
-			withConstraints: [ :constraints | constraints height: self toolbarHeight ] yourself;
+			withConstraints: [ :constraints | constraints height: self toolbarHeight ];
+		yourself;
 		add: #functionMap;
 		yourself
 ]
@@ -61,14 +62,18 @@ FunctionMap >> drawFunctionMap: aView [
 								[ :variable | model colorMap at: variable name ifAbsent: [ Color veryVeryLightGray ] ];
 						elementsOn: (each variables select: [ :var | var name matchesRegex: 'i.*' ])).
 			RTMetricNormalizer new elements: group.
-			group @ onclick.
+			group @ onclick
+				@
+					(RTShowLabel new
+						color: Color blue;
+						yourself).
 			RTGridLayout new
 				gapSize: 5;
 				applyOn: group ].
 	RTGridLayout new
 		gapSize: 10;
 		applyOn: es.
-	es
+	es @ RTDraggable
 		@
 			(RTShowLabel new
 				color: Color red;
