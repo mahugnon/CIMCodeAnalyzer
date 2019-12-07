@@ -74,7 +74,8 @@ CIMPWBModel >> pickedColor: aColor [
 
 { #category : #'as yet unclassified' }
 CIMPWBModel >> resetView [
-	self class initializeColorMap
+	self class initializeColorMap.
+	functionMap update
 ]
 
 { #category : #'as yet unclassified' }

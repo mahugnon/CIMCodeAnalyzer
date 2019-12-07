@@ -104,15 +104,21 @@ FunctionMap >> initializeWidgets [
 	model := CIMPWBModel new.
 	model functionMap: self.
 	self initializeFunctionMap.
-	openColorPalette := self newButton label: 'Open color palette'.
-	saveView := self newButton label: 'Save  View'.
-	resetView := self newButton label: 'Reset  View'.
+	openColorPalette := self newButton
+		label: 'Open color palette';
+		icon: (self iconNamed: #paint).
+	saveView := self newButton
+		label: 'Save  View';
+		icon: (self iconNamed: #glamorousSave).
+	resetView := self newButton
+		label: 'Reset  View';
+		icon: (self iconNamed: #glamorousRestart).
 	zoomIn := self newButton
 		label: 'Zoom In';
-		icon: GLMUIThemeExtraIcons glamorousZoomIn.
+		icon: (self iconNamed: #glamorousZoomIn).
 	zoomOut := self newButton
 		label: 'Zoom Out';
-		icon: GLMUIThemeExtraIcons glamorousZoomOut
+		icon: (self iconNamed: #glamorousZoomOut)
 ]
 
 { #category : #accessing }
