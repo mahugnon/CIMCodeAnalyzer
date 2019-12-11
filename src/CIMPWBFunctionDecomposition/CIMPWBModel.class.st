@@ -6,7 +6,8 @@ Class {
 		'functionMap',
 		'functionsModel',
 		'pickedColor',
-		'colorMap'
+		'colorMap',
+		'colorPalette'
 	],
 	#classInstVars : [
 		'colorMap',
@@ -49,6 +50,26 @@ CIMPWBModel >> colorMap [
 ]
 
 { #category : #accessing }
+CIMPWBModel >> colorMap: anObject [
+	colorMap := anObject
+]
+
+{ #category : #accessing }
+CIMPWBModel >> colorPalette [
+	^ colorPalette
+]
+
+{ #category : #accessing }
+CIMPWBModel >> colorPalette: anObject [
+	colorPalette := anObject
+]
+
+{ #category : #accessing }
+CIMPWBModel >> functionMap [
+	^ functionMap
+]
+
+{ #category : #accessing }
 CIMPWBModel >> functionMap: aFunctionMap [ 
 	functionMap := aFunctionMap
 ]
@@ -56,6 +77,11 @@ CIMPWBModel >> functionMap: aFunctionMap [
 { #category : #'as yet unclassified' }
 CIMPWBModel >> functionModel [
 	^ functionsModel
+]
+
+{ #category : #accessing }
+CIMPWBModel >> functionsModel: anObject [
+	functionsModel := anObject
 ]
 
 { #category : #drawing }
@@ -81,6 +107,11 @@ CIMPWBModel >> initializePWBFunctionsModel [
 ]
 
 { #category : #accessing }
+CIMPWBModel >> pickedColor [
+	^ pickedColor
+]
+
+{ #category : #accessing }
 CIMPWBModel >> pickedColor: aColor [
 	pickedColor := aColor
 ]
@@ -95,6 +126,11 @@ CIMPWBModel >> resetView [
 { #category : #'as yet unclassified' }
 CIMPWBModel >> saveView [
 	self class colorMap: colorMap
+]
+
+{ #category : #accessing }
+CIMPWBModel >> selectedVariable [
+	^ selectedVariable
 ]
 
 { #category : #accessing }
