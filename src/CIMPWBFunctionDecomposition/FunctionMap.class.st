@@ -58,14 +58,17 @@ FunctionMap >> drawFunctionMap: aView [
 			group
 				addAll:
 					(RTBox new
-						fillColor:
-								[ :variable | model colorMap at: variable name ifAbsent: [ Color veryVeryLightGray ] ];
+						fillColor: [ :variable | 
+							variable tag
+								ifNil: [ Color veryVeryLightGray ]
+								ifNotNil: [ Color fromHexString: variable tag color ] ];
 						elementsOn: (each variables select: [ :var | var name matchesRegex: 'i.*' ])).
 			RTMetricNormalizer new elements: group.
 			group @ onclick
 				@
 					(RTShowLabel new
 						color: Color blue;
+						top;
 						yourself).
 			RTGridLayout new
 				gapSize: 5;

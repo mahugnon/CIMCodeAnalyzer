@@ -73,7 +73,7 @@ colorMap := self class  colorMap
 
 { #category : #drawing }
 CIMPWBModel >> initializePWBFunctionsModel [
-	functionsModel := ((MooseModel root second
+	functionsModel := ((MooseModel root first
 		allWithType: FamixPWBFunction)
 		select: [ :each | 
 			(each variables select: [ :var | var name matchesRegex: 'i.*' ])
@@ -99,7 +99,17 @@ CIMPWBModel >> saveView [
 
 { #category : #accessing }
 CIMPWBModel >> selectedVariable: aFamixPWBVariable [
-	selectedVariable := aFamixPWBVariable.
-	colorMap at: selectedVariable name put: pickedColor.
+	| tag |
+	selectedVariable := aFamixPWBVariable name.
+	tag := FamixPWBTag new
+		color: pickedColor asHexString;
+		yourself.
+	(QueryPWBInstanceVariablesWithSameName new
+		runOn: functionsModel
+		with: aFamixPWBVariable name)
+		do: [ :var | 
+			var tag: tag.
+			tag entities add: var ].
+	aFamixPWBVariable mooseModel add: tag.
 	functionMap update
 ]
