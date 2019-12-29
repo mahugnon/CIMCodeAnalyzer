@@ -9,9 +9,8 @@ Class {
 
 { #category : #hooks }
 VariableClick >> initializeElement: element [
-	element announcer
-		when: TRMouseClick
-		do: [ self model selectedVariable: element model ]
+  element announcer when: TRMouseClick do: [ self model openColorForm.
+        self model selectedVariable: element model ]
 ]
 
 { #category : #hooks }

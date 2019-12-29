@@ -106,6 +106,13 @@ CIMPWBModel >> initializePWBFunctionsModel [
 				isNotEmpty ]) asSet sorted: [ :a :b | a name < b name ]
 ]
 
+{ #category : #'as yet unclassified' }
+CIMPWBModel >> openColorForm [
+  TagForm new
+     model: self;
+     openWithSpec
+]
+
 { #category : #accessing }
 CIMPWBModel >> pickedColor [
 	^ pickedColor

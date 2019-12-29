@@ -12,16 +12,16 @@ Class {
 
 { #category : #specs }
 TagForm class >> defaultSpec [
-	^ SpBoxLayout newVertical
-		add:
-			(SpBoxLayout newHorizontal
-				add: #formLabel;
-				add: #formInput;
-				add: #formColorPaletteButton;
-				yourself)
-			withConstraints: [ :constraints | constraints height: self toolbarHeight ];
-		yourself;
-		yourself
+  ^SpBoxLayout newVertical
+     add: (SpBoxLayout newHorizontal
+           add: #formLabel;
+           add: #formInput withConstraints: [:constraints |  constraints
+                 height: 150;
+                 width: 100 ];
+           add: #formColorPaletteButton;
+           yourself) withConstraints: [:constraints |  constraints height: self toolbarHeight; width: 10 ];
+     yourself;
+     yourself
 ]
 
 { #category : #examples }
@@ -52,4 +52,9 @@ TagForm >> initializeWidgets [
 	formColorPaletteButton
 		label: 'choose color';
 		icon: (self iconNamed: #paint)
+]
+
+{ #category : #accessing }
+TagForm >> model: anObject [
+  model := anObject
 ]
