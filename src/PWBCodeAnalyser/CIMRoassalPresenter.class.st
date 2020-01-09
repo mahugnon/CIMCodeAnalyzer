@@ -3,8 +3,7 @@ Class {
 	#superclass : #SpPresenter,
 	#instVars : [
 		'diagram',
-		'inputPort',
-		'pbModel'
+		'guiModel'
 	],
 	#category : #'PWBCodeAnalyser-TreeBase-Presenters'
 }
@@ -18,7 +17,7 @@ CIMRoassalPresenter class >> defaultSpec [
 
 { #category : #'as yet unclassified' }
 CIMRoassalPresenter >> adapterFrom: aCollection [
-	^ pbModel select: [ :each | aCollection includes: each name ]
+  ^self pbModel select: [:each |  aCollection includes: each name ]
 ]
 
 { #category : #accessing }
@@ -36,6 +35,16 @@ CIMRoassalPresenter >> drawOn: aView [
 	^ self subclassResponsibility
 ]
 
+{ #category : #accessing }
+CIMRoassalPresenter >> guiModel [
+	^ guiModel
+]
+
+{ #category : #accessing }
+CIMRoassalPresenter >> guiModel: anObject [
+	guiModel := anObject
+]
+
 { #category : #initialization }
 CIMRoassalPresenter >> initializeDiagram [
 	diagram := self instantiate: RoassalModel.
@@ -46,22 +55,11 @@ CIMRoassalPresenter >> initializeDiagram [
 ]
 
 { #category : #initialization }
-CIMRoassalPresenter >> initializeInputPort [
-	inputPort := SpModelPort new
-]
-
-{ #category : #initialization }
 CIMRoassalPresenter >> initializeWidgets [
-	self initializeDiagram.
-	self initializeInputPort
+  self initializeDiagram
 ]
 
 { #category : #accessing }
 CIMRoassalPresenter >> pbModel [
-	^ pbModel
-]
-
-{ #category : #accessing }
-CIMRoassalPresenter >> pbModel: anObject [
-	pbModel := anObject
+  ^guiModel selected content
 ]

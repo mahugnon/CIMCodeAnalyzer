@@ -21,9 +21,15 @@ CIMMooseModelPresenter class >> run [
 	self new openWithSpec
 ]
 
+{ #category : #api }
+CIMMooseModelPresenter >> focusElement: aCIMCodeAnalyserFmxPWBMethodAdapter [
+  pbModelTable selectItem: aCIMCodeAnalyserFmxPWBMethodAdapter
+]
+
 { #category : #initialization }
 CIMMooseModelPresenter >> initializeModel [
-	model := CIMMooseModelPresenterModel new
+  model := CIMMooseModelPresenterModel new.
+  model mooseModelPresenter: self
 ]
 
 { #category : #initialization }
@@ -34,30 +40,22 @@ CIMMooseModelPresenter >> initializePresenter [
 
 { #category : #initialization }
 CIMMooseModelPresenter >> initializeTable [
-	| title |
-	pbModelTable := self newTreeTable.
-	title := 'Source code components'.
-	pbModelTable
-		addColumn:
-			(SpCompositeTableColumn new
-				title: title;
-				addColumn:
-					((SpImageTableColumn evaluated: #systemIcon)
-						width: 20;
-						yourself);
-				addColumn: (SpStringTableColumn evaluated: #name);
-				yourself);
-		addColumn:
-			(SpStringTableColumn
-				title: 'Number of Line of code'
-				evaluated: [ :elt | elt numberOfLinesOfCode ]);
-		addColumn:
-			(SpStringTableColumn
-				title: 'Cyclomatic complexity'
-				evaluated: [ :elt | elt cyclomaticComplexity ]);
-		roots: {model pbModel};
-		children: [ :elt | elt content ];
-		beResizable
+  | title |
+  pbModelTable := self newTreeTable.
+  title := 'Source code components'.
+  pbModelTable
+     addColumn: (SpCompositeTableColumn new
+           title: title;
+           addColumn: ((SpImageTableColumn evaluated: #systemIcon)
+                 width: 20;
+                 yourself);
+           addColumn: (SpStringTableColumn evaluated: #name);
+           yourself);
+     addColumn: (SpStringTableColumn title: 'Number of Line of code' evaluated: [:elt |  elt numberOfLinesOfCode ]);
+     addColumn: (SpStringTableColumn title: 'Number of invocation' evaluated: [:elt |  elt numberOfIncomingInvocations ]);
+     roots: {model pbModel};
+     children: [:elt |  elt content ];
+     beResizable
 ]
 
 { #category : #initialization }
@@ -68,7 +66,8 @@ CIMMooseModelPresenter >> initializeWidgets [
 
 { #category : #accessing }
 CIMMooseModelPresenter >> model: anObject [
-	model := anObject
+  model := anObject.
+  model mooseModelPresenter: self
 ]
 
 { #category : #accessing }

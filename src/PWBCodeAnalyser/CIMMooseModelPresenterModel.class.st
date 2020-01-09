@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'pbModel',
 		'selected',
-		'selectionListeners'
+		'selectionListeners',
+		'mooseModelPresenter'
 	],
 	#category : #'PWBCodeAnalyser-Models'
 }
@@ -15,6 +16,16 @@ CIMMooseModelPresenterModel >> initialize [
 	selectionListeners := OrderedCollection new.
 	pbModel := CIMCodeAnalyserBasicAdapter
 		adapt: (MooseModel root first allWithType: FamixPWBUserObject)
+]
+
+{ #category : #accessing }
+CIMMooseModelPresenterModel >> mooseModelPresenter: aCIMMooseModelPresenter [
+  mooseModelPresenter := aCIMMooseModelPresenter
+]
+
+{ #category : #'as yet unclassified' }
+CIMMooseModelPresenterModel >> mooseModelPresenterSelectedItem: anObject [
+  mooseModelPresenter focusElement: anObject
 ]
 
 { #category : #accessing }
@@ -44,9 +55,9 @@ CIMMooseModelPresenterModel >> selected [
 
 { #category : #accessing }
 CIMMooseModelPresenterModel >> selected: anObject [
-	selected := anObject.
-	self setContent.
-	self notifySelectionListener
+  selected := anObject.
+  self setContent.
+  self notifySelectionListener
 ]
 
 { #category : #initialization }

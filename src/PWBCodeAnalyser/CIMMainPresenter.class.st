@@ -45,12 +45,11 @@ CIMMainPresenter >> initializeWidgets [
 
 { #category : #'as yet unclassified' }
 CIMMainPresenter >> updateRoassal [
-	diagramPresenter := self instantiate: model roassal.
-	diagramPresenter pbModel: model selected content.
-	self needRebuild: false.
-	self buildWithSpec
-
-	"self
+  diagramPresenter := self instantiate: model roassal.
+  diagramPresenter guiModel: model.
+  self needRebuild: false.
+  self buildWithSpec
+  "self
 		instantiatePresenters:
 			{#diagramPresenter.
 			model roassal name asSymbol}.

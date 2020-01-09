@@ -51,6 +51,11 @@ CIMCodeAnalyserBasicAdapter >> name [
 	^ pbModel name
 ]
 
+{ #category : #'as yet unclassified' }
+CIMCodeAnalyserBasicAdapter >> numberOfIncomingInvocations [
+  ^self content inject: 0 into: [:sum :each |  sum + each numberOfIncomingInvocations ]
+]
+
 { #category : #metrics }
 CIMCodeAnalyserBasicAdapter >> numberOfLinesOfCode [
 	^ pbModel numberOfLinesOfCode
