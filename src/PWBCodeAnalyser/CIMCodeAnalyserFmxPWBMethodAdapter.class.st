@@ -13,6 +13,16 @@ CIMCodeAnalyserFmxPWBMethodAdapter class >> accept [
 ]
 
 { #category : #'as yet unclassified' }
+CIMCodeAnalyserFmxPWBMethodAdapter >> allOutgoingInvocationCandidates [
+  | scan scanTop |
+  scan := OrderedCollection withAll: self outgoingInvocationsCandidates.
+  scanTop := 1.
+  [ scanTop > scan size ] whileFalse: [ scan addAll: (scan at: scanTop) outgoingInvocationsCandidates.
+        scanTop := scanTop + 1 ].
+  ^scan asSet
+]
+
+{ #category : #'as yet unclassified' }
 CIMCodeAnalyserFmxPWBMethodAdapter >> numberOfIncomingInvocations [
   ^self outgoingInvocationsCandidates size
 ]
@@ -41,7 +51,7 @@ CIMCodeAnalyserFmxPWBMethodAdapter >> roassalPresenter [
 
 { #category : #accessing }
 CIMCodeAnalyserFmxPWBMethodAdapter >> setContent [
-  content := (self outgoingInvocationsCandidates asOrderedCollection collect: [:each |  CIMCodeAnalyserBasicAdapter adapt: each ])
+  content := (self allOutgoingInvocationCandidates asOrderedCollection collect: [:each |  CIMCodeAnalyserBasicAdapter adapt: each ])
      add: self;
      yourself
 ]
