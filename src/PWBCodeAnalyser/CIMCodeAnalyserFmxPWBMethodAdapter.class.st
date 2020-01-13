@@ -14,12 +14,14 @@ CIMCodeAnalyserFmxPWBMethodAdapter class >> accept [
 
 { #category : #'as yet unclassified' }
 CIMCodeAnalyserFmxPWBMethodAdapter >> allOutgoingInvocationCandidates [
-  | scan scanTop |
-  scan := OrderedCollection withAll: self outgoingInvocationsCandidates.
-  scanTop := 1.
-  [ scanTop > scan size ] whileFalse: [ scan addAll: ((scan at: scanTop) outgoingInvocations collect: #candidates).
-        scanTop := scanTop + 1 ].
-  ^scan asSet
+	| scan scanTop |
+	scan := OrderedCollection withAll: self outgoingInvocationsCandidates.
+	scanTop := 1.
+	[ scanTop > scan size ]
+		whileFalse: [ scan
+				addAll: ((scan at: scanTop) outgoingInvocations flatCollect: #candidates).
+			scanTop := scanTop + 1 ].
+	^ scan asSet
 ]
 
 { #category : #'as yet unclassified' }
@@ -42,6 +44,11 @@ CIMCodeAnalyserFmxPWBMethodAdapter >> outgoingInvocationsCandidates [
 CIMCodeAnalyserFmxPWBMethodAdapter >> outgoingInvocationsCandidatesName [
 	^ (pbModel outgoingInvocations flatCollect: #candidates)
 		collect: #name
+]
+
+{ #category : #accessing }
+CIMCodeAnalyserFmxPWBMethodAdapter >> parentType [
+	^ pbModel parentType
 ]
 
 { #category : #'as yet unclassified' }

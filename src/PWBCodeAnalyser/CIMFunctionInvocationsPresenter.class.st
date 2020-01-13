@@ -44,31 +44,36 @@ CIMFunctionInvocationsPresenter >> drawOn1: aView [
 
 { #category : #initialization }
 CIMFunctionInvocationsPresenter >> drawOn: aView [
-  | es eb |
-  aView @ RTDraggableView @ RTZoomableView.
-  es := (RTEllipse new
-     size: 15;
-     color: Color blue) elementsOn: self pbModel.
-  aView addAll: es.
-  es @ RTDraggable.
-  es @ (RTPopup text: #name).
-  es @ (ElementClick new
-           model: self guiModel;
-           yourself).
-  eb := RTEdgeBuilder new.
-  eb shape arrowedLine.
-  eb
-     view: aView;
-     highlightable;
-     elements: es;
-     moveBehind;
-     connectToAll: [:each |  self adapterFrom: each outgoingInvocationsCandidatesName ].
-  RTMetricNormalizer new
-     elements: es;
-     normalizeSize: #numberOfLinesOfCode;
-     normalizeColor: #cyclomaticComplexity.
-  RTTreeLayout new on: aView elements.
-  ^aView build
+	| es eb |
+	aView @ RTDraggableView @ RTZoomableView.
+	es := (RTEllipse new
+		size: 15;
+		color: Color blue) elementsOn: self pbModel.
+	aView addAll: es.
+	es @ RTDraggable.
+	es
+		@
+			(RTPopup
+				text: [ :method | method parentType name , '.' , method name ]).
+	es
+		@
+			(ElementClick new
+				model: self guiModel;
+				yourself).
+	eb := RTEdgeBuilder new.
+	eb shape arrowedLine.
+	eb
+		view: aView;
+		highlightable;
+		elements: es;
+		moveBehind;
+		connectToAll: [ :each | self adapterFrom: each outgoingInvocationsCandidatesName ].
+	RTMetricNormalizer new
+		elements: es;
+		normalizeSize: #numberOfLinesOfCode;
+		normalizeColor: #cyclomaticComplexity.
+	RTTreeLayout new on: aView elements.
+	^ aView build
 ]
 
 { #category : #initialization }

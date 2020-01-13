@@ -11,30 +11,7 @@ CIMUserObjectReferencesPresenter class >> run [
 ]
 
 { #category : #initialization }
-CIMUserObjectReferencesPresenter >> drawOn2: aView [
-  | es eb |
-  aView @ RTDraggableView @ RTZoomableView.
-  es := (RTEllipse new color: [:elt |  elt incomingReferences isEmpty ifTrue: [ Color green ] ifFalse: [ Color blue ] ]) elementsOn: (self pbModel collect: #pbModel).
-  aView addAll: es.
-  es @ RTDraggable @ (RTPopup text: #name).
-  eb := RTEdgeBuilder new.
-  eb shape arrowedLine.
-  eb
-     view: aView;
-     highlightable;
-     elements: es;
-     moveBehind;
-     connectToAll: [:each |  each incomingReferences collect: #from ].
-  RTMetricNormalizer new
-     elements: es;
-     normalizeSize: #numberOfMethods;
-     normalizeColor: #numberOfLinesOfCode.
-  RTTreeLayout new on: aView elements.
-  ^aView build
-]
-
-{ #category : #initialization }
-CIMUserObjectReferencesPresenter >> drawOn: aView [
+CIMUserObjectReferencesPresenter >> drawOn1: aView [
   | userObjects userObjectElement userObjectElements shapeBuilder methods methodElements |
   aView @ RTDraggableView.
   shapeBuilder := RTShapeBuilder new.
@@ -63,4 +40,27 @@ CIMUserObjectReferencesPresenter >> drawOn: aView [
      connectToAll: [:each |  each incomingReferences collect: #from ].
   RTTreeLayout on: userObjectElements.
   ^aView
+]
+
+{ #category : #initialization }
+CIMUserObjectReferencesPresenter >> drawOn: aView [
+  | es eb |
+  aView @ RTDraggableView @ RTZoomableView.
+  es := (RTEllipse new color: [:elt |  elt incomingReferences isEmpty ifTrue: [ Color green ] ifFalse: [ Color blue ] ]) elementsOn: (self pbModel collect: #pbModel).
+  aView addAll: es.
+  es @ RTDraggable @ (RTPopup text: #name).
+  eb := RTEdgeBuilder new.
+  eb shape arrowedLine.
+  eb
+     view: aView;
+     highlightable;
+     elements: es;
+     moveBehind;
+     connectToAll: [:each |  each incomingReferences collect: #from ].
+  RTMetricNormalizer new
+     elements: es;
+     normalizeSize: #numberOfMethods;
+     normalizeColor: #numberOfLinesOfCode.
+  RTTreeLayout new on: aView elements.
+  ^aView build
 ]
