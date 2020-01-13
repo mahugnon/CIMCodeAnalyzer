@@ -54,7 +54,10 @@ CIMFunctionInvocationsPresenter >> drawOn: aView [
 	es
 		@
 			(RTPopup
-				text: [ :method | method parentType name , '.' , method name ]).
+				text: [ :method | 
+					(method parentType
+						ifNotNil: [ method parentType name , '.' ]
+						ifNil: [ '' ]) , method name ]).
 	es
 		@
 			(ElementClick new

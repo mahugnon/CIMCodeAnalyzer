@@ -11,7 +11,13 @@ CIMCodeAnalyserFmxUserObjectAdapter class >> accept [
 
 { #category : #metrics }
 CIMCodeAnalyserFmxUserObjectAdapter >> adaptPbModel [
-  ^((pbModel methods asSet reject: [:method |  method name = 'constructor' or: method name = 'destroy' ]) collect: [:each |  CIMCodeAnalyserBasicAdapter adapt: each ]) asOrderedCollection sort: [:a :b |  a numberOfLinesOfCode > b numberOfLinesOfCode ]
+	^ ((((pbModel methods asSet
+		reject: [ :method | method name = 'constructor' or: method name = 'destroy' ])
+		collect: [ :each | CIMCodeAnalyserBasicAdapter adapt: each ])
+		flatCollect: #withAllOutgoingInvocationCandidates)
+		collect: [ :each | CIMCodeAnalyserBasicAdapter adapt: each ])
+		asOrderedCollection
+		sort: [ :a :b | a numberOfLinesOfCode > b numberOfLinesOfCode ]
 ]
 
 { #category : #metrics }

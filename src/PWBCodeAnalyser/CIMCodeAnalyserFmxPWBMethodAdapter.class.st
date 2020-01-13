@@ -15,13 +15,26 @@ CIMCodeAnalyserFmxPWBMethodAdapter class >> accept [
 { #category : #'as yet unclassified' }
 CIMCodeAnalyserFmxPWBMethodAdapter >> allOutgoingInvocationCandidates [
 	| scan scanTop |
-	scan := OrderedCollection withAll: self outgoingInvocationsCandidates.
+	scan := OrderedCollection
+		withAll:
+			(self outgoingInvocationsCandidates
+				reject: [ :method | self noisyMethods includes: method name asLowercase ])
+				asSet.
 	scanTop := 1.
 	[ scanTop > scan size ]
 		whileFalse: [ scan
-				addAll: ((scan at: scanTop) outgoingInvocations flatCollect: #candidates).
+				addAll:
+					(((scan at: scanTop) outgoingInvocations flatCollect: #candidates)
+						reject: [ :method | 
+							(self noisyMethods includes: method name asLowercase)
+								or: [ scan includes: method ] ]).
 			scanTop := scanTop + 1 ].
-	^ scan asSet
+	^ scan
+]
+
+{ #category : #'as yet unclassified' }
+CIMCodeAnalyserFmxPWBMethodAdapter >> noisyMethods [
+	^ #('sort' 'len' 'setnull' 'string' 'long' 'rowcount' 'Find' 'getitemdate' 'retrieve' 'isnull' 'setsort' 'getitemstring' 'isnull' 'left' 'setrow' 'upprt' 'trim' 'right' 'now' 'datetime' 'relativedate' 'today' 'triggerevent' 'replace' 'long' 'isnumber' 'getitemnumber')
 ]
 
 { #category : #'as yet unclassified' }
@@ -61,4 +74,11 @@ CIMCodeAnalyserFmxPWBMethodAdapter >> setContent [
   content := (self allOutgoingInvocationCandidates asOrderedCollection collect: [:each |  CIMCodeAnalyserBasicAdapter adapt: each ])
      add: self;
      yourself
+]
+
+{ #category : #'as yet unclassified' }
+CIMCodeAnalyserFmxPWBMethodAdapter >> withAllOutgoingInvocationCandidates [
+	^ self allOutgoingInvocationCandidates
+		add: self pbModel;
+		yourself
 ]
