@@ -17,7 +17,7 @@ CIMCodeAnalyserFmxPWBMethodAdapter >> allOutgoingInvocationCandidates [
   | scan scanTop |
   scan := OrderedCollection withAll: self outgoingInvocationsCandidates.
   scanTop := 1.
-  [ scanTop > scan size ] whileFalse: [ scan addAll: (scan at: scanTop) outgoingInvocationsCandidates.
+  [ scanTop > scan size ] whileFalse: [ scan addAll: ((scan at: scanTop) outgoingInvocations collect: #candidates).
         scanTop := scanTop + 1 ].
   ^scan asSet
 ]
