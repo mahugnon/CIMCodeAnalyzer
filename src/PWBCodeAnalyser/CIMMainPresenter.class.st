@@ -20,14 +20,14 @@ CIMMainPresenter class >> createIcon [
 					(Base64MimeConverter
 						mimeEncode: '/Users/honore/Dropbox/icon1.png' asFileReference binaryReadStream)
 						contents , ''''
-		classified: 'PWBCodeAnalyser'.
+		classified: '*PWBCodeAnalyser'.
 	ThemeIcons
 		compile:
 			'callTreeIcon
 	^ icons
 			at: #''callTreeIcon''
 			ifAbsentPut:[ Form fromBinaryStream: self callTreeContent base64Decoded asByteArray readStream ]'
-		classified: 'PWBCodeAnalyser'.
+		classified: '*PWBCodeAnalyser'.
 	Smalltalk ui icons callTreeIcon
 ]
 
@@ -42,12 +42,11 @@ CIMMainPresenter class >> defaultSpec [
 { #category : #'as yet unclassified' }
 CIMMainPresenter class >> lunchCallTree: aBuilder [
 	<worldMenu>
-	self createIcon.
 	(aBuilder item: #LaunchPWBCallTree)
 		order: 10;
 		help:
 			'Lauch call Powerbuider methods call tree. You should install a PowerbuilderMooseModel in the image';
-		label: 'Lauch PWB callTree';
+		label: 'PWB callTree';
 		iconName: #callTreeIcon;
 		action: [ self run ]
 ]
