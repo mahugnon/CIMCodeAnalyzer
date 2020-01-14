@@ -20,7 +20,7 @@ CIMMainPresenter class >> createIcon [
 					(Base64MimeConverter
 						mimeEncode: '/Users/honore/Dropbox/icon1.png' asFileReference binaryReadStream)
 						contents , ''''
-		classified: 'PWBCodeAnalyser-'.
+		classified: 'PWBCodeAnalyser'.
 	ThemeIcons
 		compile:
 			'callTreeIcon
