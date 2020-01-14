@@ -38,6 +38,12 @@ CIMCodeAnalyserFmxUserObjectAdapter >> incomingReferencesFrom [
 ]
 
 { #category : #'as yet unclassified' }
+CIMCodeAnalyserFmxUserObjectAdapter >> incomingReferencesFromNames [
+	^ pbModel incomingReferences
+		collect: [ :reference | reference from name ]
+]
+
+{ #category : #'as yet unclassified' }
 CIMCodeAnalyserFmxUserObjectAdapter >> numberOfMethods [
 	^ self content size
 ]
