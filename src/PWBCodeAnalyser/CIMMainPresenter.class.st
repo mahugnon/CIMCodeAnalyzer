@@ -78,12 +78,6 @@ CIMMainPresenter >> initializeWidgets [
 ]
 
 { #category : #'as yet unclassified' }
-CIMMainPresenter >> lunchCallTree: aBuilder [
-	<worldMenu>
-	(aBuilder item: #LaunchPWBCallTree) action: [ self run ]
-]
-
-{ #category : #'as yet unclassified' }
 CIMMainPresenter >> updateRoassal [
   diagramPresenter := self instantiate: model roassal.
   diagramPresenter guiModel: model.
