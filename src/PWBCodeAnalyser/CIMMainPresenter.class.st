@@ -14,21 +14,22 @@ Class {
 CIMMainPresenter class >> createIcon [
 	ThemeIcons
 		compile:
-			'callTreeContent
+			'callTreeContents
 	^ '''
 				,
 					(Base64MimeConverter
-						mimeEncode: '/Users/honore/Dropbox/icon1.png' asFileReference binaryReadStream)
-						contents , ''''
+						mimeEncode:
+							'/Users/honore/Downloads/function.png' asFileReference
+								binaryReadStream) contents , ''''
 		classified: '*PWBCodeAnalyser'.
 	ThemeIcons
 		compile:
-			'callTreeIcon
+			'callGraphIcon
 	^ icons
-			at: #''callTreeIcon''
-			ifAbsentPut:[ Form fromBinaryStream: self callTreeContent base64Decoded asByteArray readStream ]'
+			at: #''callGraphIcon''
+			ifAbsentPut:[ Form fromBinaryStream: self callTreeContents base64Decoded asByteArray readStream ]'
 		classified: '*PWBCodeAnalyser'.
-	Smalltalk ui icons callTreeIcon
+	Smalltalk ui icons callGraphIcon
 ]
 
 { #category : #specs }
@@ -47,7 +48,7 @@ CIMMainPresenter class >> lunchCallTree: aBuilder [
 		help:
 			'Lauch call Powerbuider methods call tree. You should install a PowerbuilderMooseModel in the image';
 		label: 'PWB callTree';
-		iconName: #callTreeIcon;
+		iconName: #callGraphIcon;
 		action: [ self run ]
 ]
 

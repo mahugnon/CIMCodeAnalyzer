@@ -1,22 +1,49 @@
 Extension { #name : #ThemeIcons }
 
 { #category : #'*PWBCodeAnalyser' }
+ThemeIcons >> callGraphIcon [
+	^ icons
+			at: #'callGraphIcon'
+			ifAbsentPut:[ Form fromBinaryStream: self callTreeContents base64Decoded asByteArray readStream ]
+]
+
+{ #category : #'*PWBCodeAnalyser' }
 ThemeIcons >> callTreeContent [
-	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB0ElEQVQ4T5WTz0sVURTHz5lc
-NIg7GfTdOzcXwp0nRYG0F39sRFCohMLCRVsDW1mbgjYFkYsghDYpb6GCuGtRFgUt/AuaOxBE
-M/fOA32I4GiROifmgTJvknrv7u453+8Hzi+EwiuVlLQApxFpDgB2AWCbgGqA8FDr8qeiHvMB
-l6lVALhBRPd0XH5ZFJ/1PwW4LHhPSItae5VmjCeaOoB3+3Nwzgq0luvNmjn3B7KSUHD/MRFO
-Rcbrbdac6VymAqdLXkSXBZvHBNNxLFUrgAtMDaaAl9Hlwc9IS/tvc4U7TttkFt/aOloFmNJF
-jcvUKxRMfQyNN5hPClEZS5L2Cdv+9cWYm286O9fms3ytdm22YWol/zMKFnwIjRwqAijpmEjt
-g1OAnbZ1RDvjd/M6zvy9DLARGjl8Vv2Os3z/PyUYdJkipHQkjPs2WmmiYMEdAhpF0e33E+JC
-FHtXWwFwppYIrJX6IgnmPwC0KNTyaTMQwdUzIkgi4z3JrbJ6S0jrWpdf/wsi2NfbBNZSZLy6
-t+GYeMmfQbT6j9LjR9Vq348TUE/P9/Pp4e9JAroOiEmk5a2GW2gYDf/Wi3T4AsC6QkT7gLAD
-RJcArOdI6WZULb/L6/8AIG3Ae1jog4MAAAAASUVORK5CYII='
+	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
+SFlzAAAAbwAAAG8B8aLcQwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoA
+AAIbSURBVDiNlZDPSxRxGMY/M3531plZW+K7tmK4SxEUwh4MotCgIMiLeOkfCAm8dOrUqXsU
+BF48JV66SBB4S4Issx+EQbiZoKHrTrDur2zWmZXZ2ZkO2o/1YvvcXt7n/TwPr9LT0/O4u7v7
+qqZpCm3I87ywVCrNK5lM5lve7ezyZL/XDkCrrGh9xl5NaJqmeHq/549On2wHwOzN71ozq4jf
+c/LTPc4EHwAolR1WU3cgYqCYJ1B6z++bGi7B5mvU1OAfjuAIBZ+fQHYGgPDHBte75njbeIR/
+GNA0kvzciQHgRztREmchYhKuzRHWCogb07C3w5ulCbzUMGJ9vhUQqa7QZxQA2CjaBGvPUSIG
+6qXbhFuL+M9uQcNhUH/JUv40zcMN3N4rZPO1/TbHI3RcGAfNhHqV5sYrxOgkYb3K+pcHNHqH
+UNdetAK6crOMnPoKwMesTX7uLmgmYX0HMXwfOiIosSTFiw8BUA83sC5PMdlw94drKh3RY0f9
+9y8grG5Gg+xM/b8uDhRWN6PE8QTA+MhAwvPetRhc16VcLgOQSCQwDKNlr40M6AsLCzXVsqya
+bdtBO+kAtm0HlmXVFMA0TXNUVVUdwPf9c+l0eiyTych/D5aXlyu5XG5KCLEKEARB3XGcWQF4
+8Xh8UAiRAtjd3R2SUspCodCSKKWUxWJxLBaLLR4EbTmO81TRdf19MplMSynbemKlUtG3t7dz
+vwBRqdOBxv+VTgAAAABJRU5ErkJggg=='
+]
+
+{ #category : #'*PWBCodeAnalyser' }
+ThemeIcons >> callTreeContents [
+	^ 'iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlw
+SFlzAAAAbwAAAG8B8aLcQwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoA
+AAIbSURBVDiNlZDPSxRxGMY/M3531plZW+K7tmK4SxEUwh4MotCgIMiLeOkfCAm8dOrUqXsU
+BF48JV66SBB4S4Issx+EQbiZoKHrTrDur2zWmZXZ2ZkO2o/1YvvcXt7n/TwPr9LT0/O4u7v7
+qqZpCm3I87ywVCrNK5lM5lve7ezyZL/XDkCrrGh9xl5NaJqmeHq/549On2wHwOzN71ozq4jf
+c/LTPc4EHwAolR1WU3cgYqCYJ1B6z++bGi7B5mvU1OAfjuAIBZ+fQHYGgPDHBte75njbeIR/
+GNA0kvzciQHgRztREmchYhKuzRHWCogb07C3w5ulCbzUMGJ9vhUQqa7QZxQA2CjaBGvPUSIG
+6qXbhFuL+M9uQcNhUH/JUv40zcMN3N4rZPO1/TbHI3RcGAfNhHqV5sYrxOgkYb3K+pcHNHqH
+UNdetAK6crOMnPoKwMesTX7uLmgmYX0HMXwfOiIosSTFiw8BUA83sC5PMdlw94drKh3RY0f9
+9y8grG5Gg+xM/b8uDhRWN6PE8QTA+MhAwvPetRhc16VcLgOQSCQwDKNlr40M6AsLCzXVsqya
+bdtBO+kAtm0HlmXVFMA0TXNUVVUdwPf9c+l0eiyTych/D5aXlyu5XG5KCLEKEARB3XGcWQF4
+8Xh8UAiRAtjd3R2SUspCodCSKKWUxWJxLBaLLR4EbTmO81TRdf19MplMSynbemKlUtG3t7dz
+vwBRqdOBxv+VTgAAAABJRU5ErkJggg=='
 ]
 
 { #category : #'*PWBCodeAnalyser' }
 ThemeIcons >> callTreeIcon [
 	^ icons
-			at: #'callTreeIcon'
-			ifAbsentPut:[ Form fromBinaryStream: self callTreeContent base64Decoded asByteArray readStream ]
+			at: #'callGraphIcon'
+			ifAbsentPut:[ Form fromBinaryStream: self callTreeContents base64Decoded asByteArray readStream ]
 ]
