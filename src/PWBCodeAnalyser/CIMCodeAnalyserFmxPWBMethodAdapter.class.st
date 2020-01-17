@@ -33,13 +33,18 @@ CIMCodeAnalyserFmxPWBMethodAdapter >> allOutgoingInvocationCandidates [
 ]
 
 { #category : #'as yet unclassified' }
+CIMCodeAnalyserFmxPWBMethodAdapter >> incomingInvocations [
+  ^self pbModel incomingInvocations collectAsSet: #sender
+]
+
+{ #category : #'as yet unclassified' }
 CIMCodeAnalyserFmxPWBMethodAdapter >> noisyMethods [
 	^ #('sort' 'len' 'setnull' 'string' 'long' 'rowcount' 'Find' 'getitemdate' 'retrieve' 'isnull' 'setsort' 'getitemstring' 'isnull' 'left' 'setrow' 'upprt' 'trim' 'right' 'now' 'datetime' 'relativedate' 'today' 'triggerevent' 'replace' 'long' 'isnumber' 'getitemnumber')
 ]
 
 { #category : #'as yet unclassified' }
 CIMCodeAnalyserFmxPWBMethodAdapter >> numberOfIncomingInvocations [
-  ^self outgoingInvocationsCandidates size
+  ^self pbModel incomingInvocations size
 ]
 
 { #category : #'as yet unclassified' }
