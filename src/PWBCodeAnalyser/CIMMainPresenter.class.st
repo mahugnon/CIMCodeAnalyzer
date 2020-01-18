@@ -5,7 +5,8 @@ Class {
 		'modelPresenter',
 		'diagramPresenter',
 		'model',
-		'statisticPresenter'
+		'statisticPresenter',
+		'searchField'
 	],
 	#category : #'PWBCodeAnalyser-TreeBase-Presenters'
 }
@@ -34,10 +35,13 @@ CIMMainPresenter class >> createIcon [
 
 { #category : #specs }
 CIMMainPresenter class >> defaultSpec [
-	^ SpPanedLayout newHorizontal
-		add: #modelPresenter;
-		add: #diagramPresenter;
-		yourself
+  ^SpPanedLayout newHorizontal
+     add: (SpBoxLayout newVertical
+           add: #searchField withConstraints: [:constraints |  constraints height: self toolbarHeight ];
+           add: #modelPresenter;
+           yourself);
+     add: #diagramPresenter;
+     yourself
 ]
 
 { #category : #'as yet unclassified' }
@@ -64,6 +68,11 @@ CIMMainPresenter class >> title [
 ]
 
 { #category : #initialization }
+CIMMainPresenter >> initializePresenters [
+  searchField whenTextIsAcceptedDo: [:text |  modelPresenter searchEntity: text ]
+]
+
+{ #category : #initialization }
 CIMMainPresenter >> initializeRoassal [
 	diagramPresenter := self newLabel.
 	diagramPresenter label: 'Visualization here'
@@ -71,10 +80,14 @@ CIMMainPresenter >> initializeRoassal [
 
 { #category : #initialization }
 CIMMainPresenter >> initializeWidgets [
-	modelPresenter := self instantiate: CIMMooseModelPresenter.
-	model := modelPresenter pbModel.
-	model subscribeToSelectionChannel: self.
-	self initializeRoassal
+  modelPresenter := self instantiate: CIMMooseModelPresenter.
+  model := modelPresenter pbModel.
+  model subscribeToSelectionChannel: self.
+  searchField := self newTextInput
+     placeholder: 'rechercher dans le model ...';
+     yourself.
+  searchField acceptOnCR: true.
+  self initializeRoassal
 ]
 
 { #category : #'as yet unclassified' }

@@ -42,6 +42,7 @@ CIMMooseModelPresenter >> initializePresenter [
 CIMMooseModelPresenter >> initializeTable [
   | title |
   pbModelTable := self newTreeTable.
+  self searchEntity.
   title := 'Source code components'.
   pbModelTable
      addColumn: (SpCompositeTableColumn new
@@ -73,4 +74,24 @@ CIMMooseModelPresenter >> model: anObject [
 { #category : #accessing }
 CIMMooseModelPresenter >> pbModel [
 	^ model
+]
+
+{ #category : #accessing }
+CIMMooseModelPresenter >> pbModelTable [
+	^ pbModelTable
+]
+
+{ #category : #accessing }
+CIMMooseModelPresenter >> pbModelTable: anObject [
+	pbModelTable := anObject
+]
+
+{ #category : #initialization }
+CIMMooseModelPresenter >> searchEntity [
+  pbModelTable searchMatching: [:item :textToSearch |  item name beginsWith: textToSearch ]
+]
+
+{ #category : #accessing }
+CIMMooseModelPresenter >> searchFor: aText [
+  self adapter widget function searchFor: aText
 ]

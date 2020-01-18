@@ -50,7 +50,7 @@ CIMFunctionInvocationsPresenter >> drawOn: aView [
      size: 15;
      color: [:elt |  (elt outgoingInvocationsCandidates isEmpty or: [ elt incomingInvocations isEmpty ]) ifTrue: [ Color black ] ifFalse: [ Color blue ] ]) elementsOn: self pbModel.
   
-  "a CIMCodeAnalyserFmxPWBMethodAdapter"aView addAll: es.
+aView addAll: es.
   es @ RTDraggable.
   es @ (RTPopup text: [:method |  (method parentType ifNotNil: [ method parentType name , '.' ] ifNil: [ '' ]) , method name ]).
   es @ (ElementClick new
@@ -63,7 +63,7 @@ CIMFunctionInvocationsPresenter >> drawOn: aView [
      highlightable;
      elements: es;
      moveBehind;
-     connectToAll: [:each |  self adapterFrom: each outgoingInvocationsCandidatesName ].
+     connectToAll: [:each |  self adapterFrom: each outgoingInvocationsCandidates ].
   RTMetricNormalizer new
      elements: es;
      normalizeSize: #cyclomaticComplexity.

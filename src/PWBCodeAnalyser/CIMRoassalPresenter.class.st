@@ -17,7 +17,7 @@ CIMRoassalPresenter class >> defaultSpec [
 
 { #category : #'as yet unclassified' }
 CIMRoassalPresenter >> adapterFrom: aCollection [
-  ^self pbModel select: [:each |  aCollection includes: each name ]
+  ^self pbModel select: [:each |  aCollection includes: each pbModel ]
 ]
 
 { #category : #accessing }
