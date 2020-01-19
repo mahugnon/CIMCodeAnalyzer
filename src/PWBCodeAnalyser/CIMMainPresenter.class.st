@@ -6,8 +6,7 @@ Class {
 		'diagramPresenter',
 		'model',
 		'statisticPresenter',
-		'searchField',
-		'menu'
+		'searchField'
 	],
 	#category : #'PWBCodeAnalyser-TreeBase-Presenters'
 }
@@ -42,7 +41,7 @@ CIMMainPresenter class >> defaultSpec [
            add: #modelPresenter;
            yourself);
      add: (SpBoxLayout newVertical
-           add: #menu withConstraints: [:constraints |  constraints height: self toolbarHeight ];
+          " add: #menu withConstraints: [:constraints |  constraints height: self toolbarHeight ];"
            add: #diagramPresenter;
            yourself);
      yourself

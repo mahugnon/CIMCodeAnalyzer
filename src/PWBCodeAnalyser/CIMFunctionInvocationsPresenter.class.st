@@ -48,7 +48,7 @@ CIMFunctionInvocationsPresenter >> drawOn: aView [
   aView @ RTDraggableView @ RTZoomableView.
   es := (RTEllipse new
      size: 15;
-     color: [:elt |  (elt outgoingInvocationsCandidates isEmpty or: [ elt incomingInvocations isEmpty ]) ifTrue: [ Color black ] ifFalse: [ Color blue ] ]) elementsOn: self pbModel.
+     color: [:elt |  ColorStrategy colorFor: elt ]) elementsOn: self pbModel.
   aView addAll: es.
   es @ RTDraggable.
   es @ (RTPopup text: [:method |  (method parentType ifNotNil: [ method parentType name , '.' ] ifNil: [ '' ]) , method name ]).
@@ -68,8 +68,7 @@ CIMFunctionInvocationsPresenter >> drawOn: aView [
      normalizeSize: #cyclomaticComplexity.
   RTTreeLayout new on: aView elements.
   
-  "===============legend================="
-lb := RTLegendBuilder new.
+  "===============legend================="lb := RTLegendBuilder new.
   lb view: aView.
   lb right.
   lb nestDo: [:n :e :g |  n padding: 10.
@@ -82,7 +81,7 @@ lb := RTLegendBuilder new.
      borderWidth: 2.
   lb backgroundShape shape borderStyle dash.
   lb addText: 'System call Tree'.
-  lb addObject: FamixPWBFunction  text:'svbnm,j.mgdf' .
+  lb addObject: FamixPWBFunction text: 'svbnm,j.mgdf'.
   lb addColorFadingFrom: Color black to: Color red text: 'number of lines of code'.
   lb build.
   ^aView build
