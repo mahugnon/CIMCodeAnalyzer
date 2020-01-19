@@ -58,8 +58,11 @@ CIMMainPresenter class >> lunchCallTree: aBuilder [
 
 { #category : #running }
 CIMMainPresenter class >> run [
-	<example>
-	^ self new openWithSpec
+  < example>
+  | app |
+  app := SpApplication new.
+  app useBackend: #Mock.
+  ^(app new: self) openWithSpec
 ]
 
 { #category : #'as yet unclassified' }
@@ -69,7 +72,7 @@ CIMMainPresenter class >> title [
 
 { #category : #initialization }
 CIMMainPresenter >> initializePresenters [
-  searchField whenTextIsAcceptedDo: [:text |  modelPresenter searchEntity: text ]
+  searchField whenTextIsAcceptedDo: [:text |  modelPresenter searchFor: text ]
 ]
 
 { #category : #initialization }

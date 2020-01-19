@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'pbModel',
-		'content'
+		'content',
+		'currentParent'
 	],
 	#category : #'PWBCodeAnalyser-Moose-adapters'
 }

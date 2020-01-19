@@ -93,5 +93,5 @@ CIMMooseModelPresenter >> searchEntity [
 
 { #category : #accessing }
 CIMMooseModelPresenter >> searchFor: aText [
-  self adapter widget function searchFor: aText
+  pbModelTable adapter widget function searchFor: aText
 ]
