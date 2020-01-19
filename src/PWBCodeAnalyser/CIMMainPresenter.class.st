@@ -6,7 +6,8 @@ Class {
 		'diagramPresenter',
 		'model',
 		'statisticPresenter',
-		'searchField'
+		'searchField',
+		'menu'
 	],
 	#category : #'PWBCodeAnalyser-TreeBase-Presenters'
 }
@@ -40,7 +41,10 @@ CIMMainPresenter class >> defaultSpec [
            add: #searchField withConstraints: [:constraints |  constraints height: self toolbarHeight ];
            add: #modelPresenter;
            yourself);
-     add: #diagramPresenter;
+     add: (SpBoxLayout newVertical
+           add: #menu withConstraints: [:constraints |  constraints height: self toolbarHeight ];
+           add: #diagramPresenter;
+           yourself);
      yourself
 ]
 
@@ -59,10 +63,7 @@ CIMMainPresenter class >> lunchCallTree: aBuilder [
 { #category : #running }
 CIMMainPresenter class >> run [
   < example>
-  | app |
-  app := SpApplication new.
-  app useBackend: #Mock.
-  ^(app new: self) openWithSpec
+  ^self new openWithSpec
 ]
 
 { #category : #'as yet unclassified' }
@@ -90,7 +91,8 @@ CIMMainPresenter >> initializeWidgets [
      placeholder: 'rechercher dans le model ...';
      yourself.
   searchField acceptOnCR: true.
-  self initializeRoassal
+  self initializeRoassal.
+  menu := self instantiate: CIMMainMenu
 ]
 
 { #category : #'as yet unclassified' }

@@ -5,10 +5,17 @@ Class {
 		'pbModel',
 		'selected',
 		'selectionListeners',
-		'mooseModelPresenter'
+		'mooseModelPresenter',
+		'announcer'
 	],
 	#category : #'PWBCodeAnalyser-Models'
 }
+
+{ #category : #accessing }
+CIMMooseModelPresenterModel >> announcer [
+  announcer ifNil: [ announcer := Announcer new ].
+  ^announcer
+]
 
 { #category : #initialization }
 CIMMooseModelPresenterModel >> initialize [

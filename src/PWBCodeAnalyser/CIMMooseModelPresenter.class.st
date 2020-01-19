@@ -61,8 +61,9 @@ CIMMooseModelPresenter >> initializeTable [
 
 { #category : #initialization }
 CIMMooseModelPresenter >> initializeWidgets [
-	self initializeModel.
-	self initializeTable
+  self initializeModel.
+  self initializeTable.
+
 ]
 
 { #category : #accessing }
