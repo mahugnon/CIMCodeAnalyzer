@@ -46,7 +46,7 @@ CIMCodeAnalyserFmxUserObjectAdapter >> allReferences [
   result := Set new.
   result addAll: self allIncomingReferences.
   result addAll: self allOutgoingReferences.
-  ^CIMCodeAnalyserBasicAdapter adapt: (FAMIXTypeGroup withAll: result)
+  ^CIMCodeAnalyserBasicAdapter adapt: (FAMIXTypeGroup withAll: (result reject: [:obj |  obj name = 'uo_datawindow' ]))
 ]
 
 { #category : #metrics }

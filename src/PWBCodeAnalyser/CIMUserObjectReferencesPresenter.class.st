@@ -44,38 +44,29 @@ CIMUserObjectReferencesPresenter >> drawOn1: aView [
 
 { #category : #initialization }
 CIMUserObjectReferencesPresenter >> drawOn: aView [
-	| es eb |
-	aView @ RTDraggableView @ RTZoomableView.
-	es := (RTEllipse new
-		color: [ :elt | 
-			elt incomingReferences isEmpty
-				ifTrue: [ Color green ]
-				ifFalse: [ Color blue ] ])
-		elementsOn: (self pbModel collect: #pbModel).
-	aView addAll: es.
-	es @ RTDraggable.
-	es
-		@
-			(ElementClick new
-				model: self guiModel;
-				yourself).
-	es
-		@
-			((RTLabeled new text: #name)
-				fontSize: 3;
-				top).
-	eb := RTEdgeBuilder new.
-	eb shape arrowedLine.
-	eb
-		view: aView;
-		highlightable;
-		elements: es;
-		moveBehind;
-		connectFromAll: [ :each | each incomingReferences collect: #from ].
-	RTMetricNormalizer new
-		elements: es;
-		normalizeSize: #numberOfMethods;
-		normalizeColor: #numberOfLinesOfCode.
-	RTTreeLayout new on: aView elements.
-	^ aView build
+  | es eb |
+  aView @ RTDraggableView @ RTZoomableView.
+  es := (RTEllipse new color: [:elt |  elt incomingReferences isEmpty ifTrue: [ Color green ] ifFalse: [ Color blue ] ]) elementsOn: (self pbModel collect: #pbModel).
+  aView addAll: es.
+  es @ RTDraggable.
+  es @ (ElementClick new
+           model: self guiModel;
+           yourself).
+  es @ ((RTLabeled new text: #name)
+           fontSize: 3;
+           top).
+  eb := RTEdgeBuilder new.
+  eb shape arrowedLine.
+  eb
+     view: aView;
+     highlightable;
+     elements: es;
+     moveBehind;
+     connectFromAll: [:each |  each incomingReferences collect: #from ].
+  RTMetricNormalizer new
+     elements: es;
+     normalizeSize: #numberOfMethods;
+     normalizeColor: #numberOfLinesOfCode.
+  RTTreeLayout new on: aView elements.
+  ^aView build
 ]
