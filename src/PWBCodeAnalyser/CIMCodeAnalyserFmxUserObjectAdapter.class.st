@@ -40,6 +40,13 @@ CIMCodeAnalyserFmxUserObjectAdapter >> allOutgoingReferences [
   ^scan
 ]
 
+{ #category : #api }
+CIMCodeAnalyserFmxUserObjectAdapter >> allReferences [
+  ^(self allIncomingReferences
+     addAll: self incomingReferences;
+     yourself) asSet collect: [:ref |  CIMCodeAnalyserBasicAdapter adapt: ref ]
+]
+
 { #category : #metrics }
 CIMCodeAnalyserFmxUserObjectAdapter >> cyclomaticComplexity [
 	^ self content 
@@ -50,17 +57,6 @@ CIMCodeAnalyserFmxUserObjectAdapter >> cyclomaticComplexity [
 { #category : #api }
 CIMCodeAnalyserFmxUserObjectAdapter >> incomingReferences [
   ^((pbModel incomingReferences collectAsSet: #from) reject: [:userObject |  self toSkipForNow: userObject ]) asSet
-]
-
-{ #category : #'as yet unclassified' }
-CIMCodeAnalyserFmxUserObjectAdapter >> incomingReferencesFrom [
-	^ pbModel incomingReferences collect: #from
-]
-
-{ #category : #'as yet unclassified' }
-CIMCodeAnalyserFmxUserObjectAdapter >> incomingReferencesFromNames [
-	^ pbModel incomingReferences
-		collect: [ :reference | reference from name ]
 ]
 
 { #category : #'as yet unclassified' }
