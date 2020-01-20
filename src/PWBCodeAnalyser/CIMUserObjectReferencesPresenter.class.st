@@ -46,14 +46,14 @@ CIMUserObjectReferencesPresenter >> drawOn1: aView [
 CIMUserObjectReferencesPresenter >> drawOn: aView [
   | es eb |
   aView @ RTDraggableView @ RTZoomableView.
-  es := (RTEllipse new color: [:elt |  elt incomingReferences isEmpty ifTrue: [ Color green ] ifFalse: [ Color blue ] ]) elementsOn: (self pbModel collect: #pbModel).
+  es := (RTEllipse new color: Color blue) elementsOn: (self pbModel collect: #pbModel).
   aView addAll: es.
   es @ RTDraggable.
   es @ (ElementClick new
            model: self guiModel;
            yourself).
   es @ ((RTLabeled new text: #name)
-           fontSize: 3;
+           fontSize: 5;
            top).
   eb := RTEdgeBuilder new.
   eb shape arrowedLine.
@@ -65,8 +65,7 @@ CIMUserObjectReferencesPresenter >> drawOn: aView [
      connectFromAll: [:each |  each incomingReferences collect: #from ].
   RTMetricNormalizer new
      elements: es;
-     normalizeSize: #numberOfMethods;
-     normalizeColor: #numberOfLinesOfCode.
+     normalizeSize: #numberOfMethods.
   RTTreeLayout new on: aView elements.
   ^aView build
 ]
