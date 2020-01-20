@@ -66,6 +66,7 @@ CIMUserObjectReferencesPresenter >> drawOn: aView [
   RTMetricNormalizer new
      elements: es;
      normalizeSize: #numberOfMethods.
-  RTTreeLayout new on: aView elements.
+  RTHorizontalTreeLayout new on: aView elements;
+horizontalGap:20.0 .
   ^aView build
 ]
