@@ -42,9 +42,11 @@ CIMCodeAnalyserFmxUserObjectAdapter >> allOutgoingReferences [
 
 { #category : #api }
 CIMCodeAnalyserFmxUserObjectAdapter >> allReferences [
-  ^(self allIncomingReferences
-     addAll: self incomingReferences;
-     yourself) asSet collect: [:ref |  CIMCodeAnalyserBasicAdapter adapt: ref ]
+  | result |
+  result := Set new.
+  result addAll: self allIncomingReferences.
+  result addAll: self allOutgoingReferences.
+  ^CIMCodeAnalyserBasicAdapter adapt: (FAMIXTypeGroup withAll: result)
 ]
 
 { #category : #metrics }

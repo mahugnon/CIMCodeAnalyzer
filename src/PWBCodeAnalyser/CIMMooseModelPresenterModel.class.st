@@ -19,21 +19,11 @@ CIMMooseModelPresenterModel >> announcer [
 
 { #category : #initialization }
 CIMMooseModelPresenterModel >> initialize [
-	| liq_cal |
-	super initialize.
-	selectionListeners := OrderedCollection new.
-	liq_cal := (MooseModel root first allWithType: FamixPWBUserObject)
-		detect: [ :each | each name = 'uo_traitement_liq_cal' ].
-	pbModel := liq_cal incomingReferences collectAsSet: #source.
-	pbModel addAll: (liq_cal outgoingReferences collectAsSet: #target).
-	pbModel := pbModel
-		reject: [ :elt | 
-			elt class = FamixPWBWindow
-				or: [ elt class = FamixPWBCustomType
-						or:
-							[ elt class = FamixPWBDataWindow or: [ elt class = FamixPWBFunction ] ] ] ].
-	pbModel := CIMCodeAnalyserBasicAdapter
-		adapt: (FAMIXTypeGroup withAll: pbModel)
+  | liq_cal |
+  super initialize.
+  selectionListeners := OrderedCollection new.
+  liq_cal := (MooseModel root first allWithType: FamixPWBUserObject) detect: [:each |  each name = 'uo_traitement_liq_cal' ].
+  pbModel := (CIMCodeAnalyserFmxUserObjectAdapter new pbModel: liq_cal) allReferences
 ]
 
 { #category : #accessing }
