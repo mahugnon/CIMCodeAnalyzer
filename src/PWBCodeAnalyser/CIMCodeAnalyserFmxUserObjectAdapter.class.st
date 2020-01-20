@@ -20,6 +20,26 @@ CIMCodeAnalyserFmxUserObjectAdapter >> adaptPbModel [
 		sort: [ :a :b | a numberOfLinesOfCode > b numberOfLinesOfCode ]
 ]
 
+{ #category : #'as yet unclassified' }
+CIMCodeAnalyserFmxUserObjectAdapter >> allIncomingReferences [
+  | scan scanTop |
+  scan := self incomingReferences asOrderedCollection.
+  scanTop := 1.
+  [ scanTop > scan size ] whileFalse: [ scan addAll: (((scan at: scanTop) incomingReferences collect: #target) reject: [:userObject |  (scan includes: userObject) or: [ self toSkipForNow: userObject ] ]).
+        scanTop := scanTop + 1 ].
+  ^scan
+]
+
+{ #category : #'as yet unclassified' }
+CIMCodeAnalyserFmxUserObjectAdapter >> allOutgoingReferences [
+  | scan scanTop |
+  scan := self outgoingReferences asOrderedCollection.
+  scanTop := 1.
+  [ scanTop > scan size ] whileFalse: [ scan addAll: (((scan at: scanTop) outgoingReferences collect: #target) reject: [:userObject |  (scan includes: userObject) or: [ self toSkipForNow: userObject ] ]).
+        scanTop := scanTop + 1 ].
+  ^scan
+]
+
 { #category : #metrics }
 CIMCodeAnalyserFmxUserObjectAdapter >> cyclomaticComplexity [
 	^ self content 
@@ -29,7 +49,7 @@ CIMCodeAnalyserFmxUserObjectAdapter >> cyclomaticComplexity [
 
 { #category : #api }
 CIMCodeAnalyserFmxUserObjectAdapter >> incomingReferences [
-	^ pbModel incomingReferences collectAsSet: #from
+  ^((pbModel incomingReferences collectAsSet: #from) reject: [:userObject |  self toSkipForNow: userObject ]) asSet
 ]
 
 { #category : #'as yet unclassified' }
@@ -54,6 +74,11 @@ CIMCodeAnalyserFmxUserObjectAdapter >> outgoingInvocations [
 ]
 
 { #category : #'as yet unclassified' }
+CIMCodeAnalyserFmxUserObjectAdapter >> outgoingReferences [
+  ^((pbModel outgoingReferences collectAsSet: #target) reject: [:userObject |  self toSkipForNow: userObject ]) asSet
+]
+
+{ #category : #'as yet unclassified' }
 CIMCodeAnalyserFmxUserObjectAdapter >> roassalPresenter [
 	^ CIMFunctionInvocationsPresenter
 ]
@@ -61,4 +86,13 @@ CIMCodeAnalyserFmxUserObjectAdapter >> roassalPresenter [
 { #category : #accessing }
 CIMCodeAnalyserFmxUserObjectAdapter >> setContent [
 	content := self adaptPbModel
+]
+
+{ #category : #'as yet unclassified' }
+CIMCodeAnalyserFmxUserObjectAdapter >> toSkipForNow: anObject [
+  self flag: 'To be considered later'.
+  ^{FamixPWBWindow . 
+  FamixPWBCustomType . 
+  FamixPWBDataWindow . 
+  FamixPWBFunction} includes: anObject class
 ]
