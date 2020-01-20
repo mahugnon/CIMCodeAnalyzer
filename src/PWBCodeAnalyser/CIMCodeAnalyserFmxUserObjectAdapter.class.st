@@ -6,7 +6,7 @@ Class {
 
 { #category : #visiting }
 CIMCodeAnalyserFmxUserObjectAdapter class >> accept [
-	^ {FamixPWBUserObject}
+	^ {FamixPWBUserObject. FamixPWBCustomType. FamixPWBWindow}
 ]
 
 { #category : #metrics }

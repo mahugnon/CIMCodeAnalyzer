@@ -53,12 +53,17 @@ CIMUserObjectReferencesPresenter >> drawOn: aView [
 				ifFalse: [ Color blue ] ])
 		elementsOn: (self pbModel collect: #pbModel).
 	aView addAll: es.
-	es @ RTDraggable @ (RTPopup text: #name).
+	es @ RTDraggable.
 	es
 		@
 			(ElementClick new
 				model: self guiModel;
 				yourself).
+	es
+		@
+			((RTLabeled new text: #name)
+				fontSize: 3;
+				top).
 	eb := RTEdgeBuilder new.
 	eb shape arrowedLine.
 	eb
@@ -66,7 +71,7 @@ CIMUserObjectReferencesPresenter >> drawOn: aView [
 		highlightable;
 		elements: es;
 		moveBehind;
-		connectToAll: [ :each | each incomingReferences collect: #from ].
+		connectFromAll: [ :each | each incomingReferences collect: #from ].
 	RTMetricNormalizer new
 		elements: es;
 		normalizeSize: #numberOfMethods;
